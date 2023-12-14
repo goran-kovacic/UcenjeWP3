@@ -48,8 +48,7 @@ oib char(11),
 iban varchar(50)
 );
 
--- ako nešto pogriješim onda mogu obrisati tablicu pa ponovo kreirati
---drop table predavaci;
+
 
 
 create table clanovi(
