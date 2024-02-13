@@ -27,9 +27,11 @@ namespace ConsoleApp.CiklicnaMatrica
             
             int RowMax = Row, ColumnMax = Column;
             int RowMin = 1, ColumnMin = 1;
-            
 
-            int[,] table = CiklicnaHelpers.TableClockwise(Value, Row, Column, RowMin, RowMax, ColumnMin, ColumnMax);
+
+            //int[,] table = CiklicnaHelpers.TableClockwise(Value, Row, Column, RowMin, RowMax, ColumnMin, ColumnMax);
+
+            int[,] table = CiklicnaHelpers.TableCounterClockwise(Value, Row, Column, RowMin, RowMax, ColumnMin, ColumnMax);
 
             for (int i = 0; i < Row; i++)
             {
