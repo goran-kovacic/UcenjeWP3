@@ -22,16 +22,27 @@ namespace ConsoleApp.CiklicnaMatrica
             Console.Write("Enter starting value: ");
             int Value = Dev ? 1 : int.Parse(Console.ReadLine());
 
+            Console.Write("(1) Clockwise or (2) Counterclockwise: ");
+            int direction = int.Parse(Console.ReadLine());
+
             Console.WriteLine();
 
             
             int RowMax = Row, ColumnMax = Column;
             int RowMin = 1, ColumnMin = 1;
+            int[,] table = new int[Row,Column];
 
+            if (direction == 1)
+            {
+                table = CiklicnaHelpers.TableClockwise(Value, Row, Column, RowMin, RowMax, ColumnMin, ColumnMax);
+            }else if (direction==2)
+            {
+                table = CiklicnaHelpers.TableCounterClockwise(Value, Row, Column, RowMin, RowMax, ColumnMin, ColumnMax);
+            }
 
             //int[,] table = CiklicnaHelpers.TableClockwise(Value, Row, Column, RowMin, RowMax, ColumnMin, ColumnMax);
 
-            int[,] table = CiklicnaHelpers.TableCounterClockwise(Value, Row, Column, RowMin, RowMax, ColumnMin, ColumnMax);
+            //int[,] table = CiklicnaHelpers.TableCounterClockwise(Value, Row, Column, RowMin, RowMax, ColumnMin, ColumnMax);
 
             for (int i = 0; i < Row; i++)
             {
