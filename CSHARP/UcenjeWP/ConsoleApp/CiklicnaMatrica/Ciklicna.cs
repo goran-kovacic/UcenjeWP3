@@ -20,7 +20,7 @@ namespace ConsoleApp.CiklicnaMatrica
             int Column = Dev ? 5 : int.Parse(Console.ReadLine());
 
             Console.Write("Enter starting value: ");
-            int Value = int.Parse(Console.ReadLine());
+            int Value = Dev ? 1 : int.Parse(Console.ReadLine());
 
             Console.WriteLine();
 

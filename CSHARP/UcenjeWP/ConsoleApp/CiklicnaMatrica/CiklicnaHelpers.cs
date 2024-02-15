@@ -54,7 +54,7 @@
             RowMax--;
             ColumnMin++;
 
-           
+
         }
         return table;
     }
@@ -67,32 +67,45 @@
         {
             for (int j = RowMin; j <= RowMax; j++) //bottom to top
             {
-                table[Row - j, Column-1] = Value++;
+                table[Row - j, Column - ColumnMin] = Value++;
             }
-            if (Value > (Row * Column))
+            if (Value > (Row * Column) + Value - 1)
             {
                 break;
             }
+
             ColumnMin++;
 
-            for (int j = ColumnMin; j <= Column - ColumnMin; j++) // right to left
+            for (int j = ColumnMin; j <= ColumnMax; j++) // right to left
             {
-                table[Row - RowMax, ColumnMax - j] = Value++;
+                table[Row - RowMax, Column - j] = Value++;
             }
-            if (Value > (Row * Column))
+            if (Value > (Row * Column) + Value - 1)
             {
                 break;
             }
 
-            for (int j = RowMin - 1; j <= Row - RowMin; j++) //top to bottom
+            RowMax--;
+
+            for (int j = RowMin; j <= Row - RowMin; j++) //top to bottom
             {
-                table[j, ColumnMax] = Value++;
+                table[j, Column-ColumnMax] = Value++;
             }
-            if (Value > (Row * Column))
+            if (Value > (Row * Column) + Value - 1)
             {
                 break;
             }
-            RowMax--;
+            RowMin++;
+            ColumnMax--;
+
+            for(int j= ColumnMin; j <= ColumnMax; j++) // left to right
+            {
+                table[RowMax, j-1] = Value++;
+            }
+            if(Value > (Row * Column) + Value - 1)
+            {
+                break;
+            }
 
         }
 
