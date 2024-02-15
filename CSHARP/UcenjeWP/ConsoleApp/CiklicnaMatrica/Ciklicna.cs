@@ -20,7 +20,7 @@ namespace ConsoleApp.CiklicnaMatrica
             int Column = Dev ? 5 : int.Parse(Console.ReadLine());
 
             Console.Write("Enter starting value: ");
-            int Value = Dev ? 1 : int.Parse(Console.ReadLine());
+            int StartingValue = Dev ? 1 : int.Parse(Console.ReadLine());
 
             Console.Write("(1) Clockwise or (2) Counterclockwise: ");
             int direction = int.Parse(Console.ReadLine());
@@ -34,10 +34,10 @@ namespace ConsoleApp.CiklicnaMatrica
 
             if (direction == 1)
             {
-                table = CiklicnaHelpers.TableClockwise(Value, Row, Column, RowMin, RowMax, ColumnMin, ColumnMax);
+                table = CiklicnaHelpers.BottomRightClockwise(Row, Column, RowMin, RowMax, ColumnMin, ColumnMax, StartingValue);
             }else if (direction==2)
             {
-                table = CiklicnaHelpers.TableCounterClockwise(Value, Row, Column, RowMin, RowMax, ColumnMin, ColumnMax);
+                table = CiklicnaHelpers.BottomRightCounterClockwise(Row, Column, RowMin, RowMax, ColumnMin, ColumnMax, StartingValue);
             }
 
             //int[,] table = CiklicnaHelpers.TableClockwise(Value, Row, Column, RowMin, RowMax, ColumnMin, ColumnMax);

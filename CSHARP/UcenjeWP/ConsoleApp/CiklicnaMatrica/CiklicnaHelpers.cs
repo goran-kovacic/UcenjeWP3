@@ -1,15 +1,17 @@
 ﻿internal static class CiklicnaHelpers
 {
 
-    internal static int[,] TableClockwise(int Value,
+    internal static int[,] BottomRightClockwise(
                                          int Row,
                                          int Column,
                                          int RowMin,
                                          int RowMax,
                                          int ColumnMin,
-                                         int ColumnMax)
+                                         int ColumnMax,
+                                         int StartingValue)
     {
         int[,] table = new int[Row, Column];
+        int Value = StartingValue;
 
         for (int i = Value; i <= (Row * Column); i++)
         {
@@ -17,7 +19,7 @@
             {
                 table[Row - RowMin, Column - j] = Value++;
             }
-            if (Value > (Row * Column) + Value - 1)
+            if (Value > (Row * Column) + StartingValue-1)
             {
                 break;
             }
@@ -28,7 +30,7 @@
             {
                 table[Row - j, Column - ColumnMax] = Value++;
             }
-            if (Value > (Row * Column) + Value - 1)
+            if (Value > (Row * Column)+ StartingValue-1)
             {
                 break;
             }
@@ -37,7 +39,7 @@
             {
                 table[Row - RowMax, j] = Value++;
             }
-            if (Value > (Row * Column) + Value - 1)
+            if (Value > (Row * Column) + StartingValue-1)
             {
                 break;
             }
@@ -47,7 +49,7 @@
             {
                 table[j, ColumnMax] = Value++;
             }
-            if (Value > (Row * Column) + Value - 1)
+            if (Value > (Row * Column) + StartingValue-1)
             {
                 break;
             }
@@ -58,10 +60,12 @@
         }
         return table;
     }
-    internal static int[,] TableCounterClockwise(int Value,
-       int Row, int Column, int RowMin, int RowMax, int ColumnMin, int ColumnMax)
+    internal static int[,] BottomRightCounterClockwise(
+       int Row, int Column, int RowMin, int RowMax, int ColumnMin, int ColumnMax, int StartingValue)
     {
         int[,] table = new int[Row, Column];
+        int Value = StartingValue;
+
 
         for (int i = Value; i <= (Row * Column); i++)
         {
@@ -69,7 +73,7 @@
             {
                 table[Row - j, Column - ColumnMin] = Value++;
             }
-            if (Value > (Row * Column) + Value - 1)
+            if (Value > (Row * Column) + StartingValue - 1)
             {
                 break;
             }
@@ -80,7 +84,7 @@
             {
                 table[Row - RowMax, Column - j] = Value++;
             }
-            if (Value > (Row * Column) + Value - 1)
+            if (Value > (Row * Column) + StartingValue - 1)
             {
                 break;
             }
@@ -91,7 +95,7 @@
             {
                 table[j, Column-ColumnMax] = Value++;
             }
-            if (Value > (Row * Column) + Value - 1)
+            if (Value > (Row * Column) + StartingValue - 1)
             {
                 break;
             }
@@ -102,7 +106,7 @@
             {
                 table[RowMax, j-1] = Value++;
             }
-            if(Value > (Row * Column) + Value - 1)
+            if(Value > (Row * Column) + StartingValue - 1)
             {
                 break;
             }
