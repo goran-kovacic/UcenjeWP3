@@ -22,8 +22,8 @@ namespace ConsoleApp.CiklicnaMatrica
             Console.Write("Enter starting value: ");
             int StartingValue = Dev ? 1 : int.Parse(Console.ReadLine());
 
-            Console.Write("(1) Clockwise or (2) Counterclockwise: ");
-            int direction = int.Parse(Console.ReadLine());
+            //Console.Write("(1) Clockwise or (2) Counterclockwise: ");
+            //int direction = int.Parse(Console.ReadLine());
 
             Console.WriteLine();
 
@@ -32,17 +32,15 @@ namespace ConsoleApp.CiklicnaMatrica
             int RowMin = 1, ColumnMin = 1;
             int[,] table = new int[Row,Column];
 
-            if (direction == 1)
-            {
-                table = CiklicnaHelpers.BottomRightClockwise(Row, Column, RowMin, RowMax, ColumnMin, ColumnMax, StartingValue);
-            }else if (direction==2)
-            {
-                table = CiklicnaHelpers.BottomRightCounterClockwise(Row, Column, RowMin, RowMax, ColumnMin, ColumnMax, StartingValue);
-            }
+            //if (direction == 1)
+            //{
+            //    table = CiklicnaHelpers.BottomRightClockwise(Row, Column, RowMin, RowMax, ColumnMin, ColumnMax, StartingValue);
+            //}else if (direction==2)
+            //{
+            //    table = CiklicnaHelpers.BottomRightCounterClockwise(Row, Column, RowMin, RowMax, ColumnMin, ColumnMax, StartingValue);
+            //}
 
-            //int[,] table = CiklicnaHelpers.TableClockwise(Value, Row, Column, RowMin, RowMax, ColumnMin, ColumnMax);
-
-            //int[,] table = CiklicnaHelpers.TableCounterClockwise(Value, Row, Column, RowMin, RowMax, ColumnMin, ColumnMax);
+            table = CiklicnaHelpers.TopRightCounterClockwise(Row, Column, RowMin, RowMax, ColumnMin, ColumnMax, StartingValue);
 
             for (int i = 0; i < Row; i++)
             {
