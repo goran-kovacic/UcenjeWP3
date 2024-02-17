@@ -11,7 +11,7 @@ namespace ConsoleApp.CiklicnaMatrica
 
         public static void Run()
         {
-            bool Dev = false;
+            bool Dev = true;
 
             Console.Write("Enter number of rows: ");
             int Row = Dev ? 5 : int.Parse(Console.ReadLine());
@@ -40,7 +40,7 @@ namespace ConsoleApp.CiklicnaMatrica
             //    table = CiklicnaHelpers.BottomRightCounterClockwise(Row, Column, RowMin, RowMax, ColumnMin, ColumnMax, StartingValue);
             //}
 
-            table = BottomRightClockwise.DrawTable(Row, Column, RowMin, RowMax, ColumnMin, ColumnMax, StartingValue);
+            table = TopRightClockwise.DrawTable(Row, Column, RowMin, RowMax, ColumnMin, ColumnMax, StartingValue);
 
             for (int i = 0; i < Row; i++)
             {
