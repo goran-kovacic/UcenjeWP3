@@ -11,7 +11,7 @@ namespace ConsoleApp.CiklicnaMatrica
 
         public static void Run()
         {
-            bool Dev = true;
+            bool Dev = false;
 
             Console.Write("Enter number of rows: ");
             int Row = Dev ? 5 : int.Parse(Console.ReadLine());
