@@ -40,7 +40,7 @@ namespace ConsoleApp.CiklicnaMatrica
             //    table = CiklicnaHelpers.BottomRightCounterClockwise(Row, Column, RowMin, RowMax, ColumnMin, ColumnMax, StartingValue);
             //}
 
-            table = TopRightClockwise.DrawTable(Row, Column, RowMin, RowMax, ColumnMin, ColumnMax, StartingValue);
+            table = TopLeftClockwise.DrawTable(Row, Column, RowMin, RowMax, ColumnMin, ColumnMax, StartingValue);
 
             for (int i = 0; i < Row; i++)
             {

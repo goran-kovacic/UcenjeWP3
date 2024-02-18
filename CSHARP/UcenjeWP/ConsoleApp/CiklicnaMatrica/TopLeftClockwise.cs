@@ -6,22 +6,33 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp.CiklicnaMatrica
 {
-    internal class TopRightClockwise
+    internal class TopLeftClockwise
     {
 
         internal static int[,] DrawTable(int Row,
-                                         int Column,
-                                         int RowMin,
-                                         int RowMax,
-                                         int ColumnMin,
-                                         int ColumnMax,
-                                         int StartingValue)
+                                        int Column,
+                                        int RowMin,
+                                        int RowMax,
+                                        int ColumnMin,
+                                        int ColumnMax,
+                                        int StartingValue)
         {
             int Value = StartingValue;
             int[,] table = new int[Row, Column];
 
             for (int i = Value; i <= (Row * Column); i++)
             {
+                for (int j = ColumnMin; j <= ColumnMax; j++) //left to right
+                {
+                    table[RowMin-1, j-1] = Value++;
+                }
+                if (Value > (Row * Column) + StartingValue - 1)
+                {
+                    break;
+                }
+                RowMin++;
+
+
                 for (int j = RowMin; j <= RowMax; j++) //top to bottom
                 {
                     table[j - 1, ColumnMax - 1] = Value++;
@@ -30,8 +41,8 @@ namespace ConsoleApp.CiklicnaMatrica
                 {
                     break;
                 }
+
                 ColumnMin++;
-                
 
                 for (int j = ColumnMin; j <= ColumnMax; j++) //right to left
                 {
@@ -41,23 +52,12 @@ namespace ConsoleApp.CiklicnaMatrica
                 {
                     break;
                 }
-                
-                ColumnMax--;
-                RowMin++;
-                for (int j = RowMin; j <= RowMax; j++) //bottom to top
-                {
-                    table[Row - j, ColumnMin - 2] = Value++;
-                }
-                if (Value > (Row * Column) + StartingValue - 1)
-                {
-                    break;
-                }
                 RowMax--;
+                ColumnMax--;
 
-
-                for (int j = ColumnMin; j <= ColumnMax; j++) //left to right
+                for (int j = RowMin; j <= RowMax; j++) //Bottom to top
                 {
-                    table[RowMin -2, j - 1] = Value++;
+                    table[Row - j, Column - ColumnMax - 1] = Value++;
                 }
                 if (Value > (Row * Column) + StartingValue - 1)
                 {
@@ -69,4 +69,6 @@ namespace ConsoleApp.CiklicnaMatrica
             return table;
         }
     }
+
 }
+
