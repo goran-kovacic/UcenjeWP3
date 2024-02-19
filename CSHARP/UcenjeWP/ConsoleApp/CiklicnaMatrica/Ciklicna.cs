@@ -8,53 +8,35 @@ namespace ConsoleApp.CiklicnaMatrica
 {
     internal class Ciklicna
     {
-        private static int[,] table;
-        private static int Row;
-        private static int Column;
-        private static int RowMin;
-        private static int RowMax;
-        private static int ColumnMin;
-        private static int ColumnMax;
-        private static int StartingValue;
 
         public static void Run()
         {
             bool Dev = false;
-            bool isValidInput = false;
-            while (!isValidInput)
-            {
-                try
-                {
-                    Console.Write("Enter number of rows: ");
-                    int Row = Dev ? 5 : int.Parse(Console.ReadLine());
 
-                    Console.Write("Enter number of columns: ");
-                    int Column = Dev ? 5 : int.Parse(Console.ReadLine());
+            int Row = Dev ? 5 : CiklicnaHelpers.InputPositiveInteger("Enter number of rows: ");
+            int Column = Dev ? 5 : CiklicnaHelpers.InputPositiveInteger("Enter number of columns: ");
+            int StartingValue = Dev ? 1 : CiklicnaHelpers.InputInteger("Enter starting value: ");
 
-                    Console.Write("Enter starting value: ");
-                    int StartingValue = Dev ? 1 : int.Parse(Console.ReadLine());
-                    isValidInput = true;
+            int RowMax = Row, ColumnMax = Column;
+            int RowMin = 1, ColumnMin = 1;
+            int[,] table = new int[Row, Column];
 
-                    int RowMax = Row, ColumnMax = Column;
-                    int RowMin = 1, ColumnMin = 1;
-                    int[,] table = new int[Row, Column];
-                }
-                catch (Exception) { }
-            }
             Console.Write("Select (1) Clockwise or (2) Counterclockwise: ");
-            int rotation=0;
+            int rotation = 0;
 
             while (true)
             {
-                try 
+                try
                 {
-                    rotation = int.Parse(Console.ReadLine()); 
+                    rotation = int.Parse(Console.ReadLine());
                 }
-                catch(Exception)
+                catch (Exception)
                 {
                 }
-                
-                if (rotation == 1 || rotation == 2) { break; }
+                if (rotation == 1 || rotation == 2)
+                {
+                    break;
+                }
                 Console.WriteLine("Enter 1 or 2!");
             }
 
@@ -67,7 +49,7 @@ namespace ConsoleApp.CiklicnaMatrica
 
             if (rotation == 1)
             {
-                int position = 0 ;
+                int position = 0;
 
                 while (true)
                 {
@@ -78,7 +60,6 @@ namespace ConsoleApp.CiklicnaMatrica
                     catch (Exception)
                     {
                     }
-                    
                     if (position <= 4 && position >= 1)
                     {
                         break;
@@ -108,7 +89,7 @@ namespace ConsoleApp.CiklicnaMatrica
             }
             else if (rotation == 2)
             {
-                int position=0;
+                int position = 0;
 
                 while (true)
                 {
@@ -119,8 +100,6 @@ namespace ConsoleApp.CiklicnaMatrica
                     catch (Exception)
                     {
                     }
-
-                    
                     if (position <= 4 && position >= 1)
                     {
                         break;
@@ -156,7 +135,6 @@ namespace ConsoleApp.CiklicnaMatrica
                 }
                 Console.WriteLine();
             }
-
         }
     }
 }
