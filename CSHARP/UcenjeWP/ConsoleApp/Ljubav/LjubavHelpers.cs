@@ -43,7 +43,6 @@ namespace ConsoleApp.Ljubav
                 StartingArrayList.Add(counter);
             }
             return getSingleDigits(StartingArrayList);
-            //return StartingArrayList;
         }
 
         internal static int ljubav(ArrayList arlist)
@@ -69,11 +68,9 @@ namespace ConsoleApp.Ljubav
             {
                 int sum = 0;
                 sum = i != j ? (int)arlist[i] + (int)arlist[j] : (int)arlist[i];
-
                 result.Add(sum);
             }
             printArrayList(getSingleDigits(result));
-
             return ljubav(getSingleDigits(result));
         }
 
@@ -103,6 +100,5 @@ namespace ConsoleApp.Ljubav
             }
             Console.WriteLine();
         }
-
     }
 }
