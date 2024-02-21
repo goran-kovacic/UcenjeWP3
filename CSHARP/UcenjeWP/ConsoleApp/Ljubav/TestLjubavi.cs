@@ -22,27 +22,36 @@ namespace ConsoleApp.Ljubav
             var StartingArrayList = new ArrayList();
 
             int counter;
-            char letter;
+            //char letter;
 
             Console.WriteLine(Name[1]);
 
             foreach (char c in Name)
             {
-                letter = c;
+                //letter = c;
                 counter = 0;
                 foreach (char c2 in Name)
                 {
-                    if (c2 == letter)
+                    if (c2 == c)
                     {
                         counter++;
                     }
                 }
-                StartingArrayList.Add(counter);                
+                StartingArrayList.Add(counter);
             }
-            foreach(var item in StartingArrayList)
+            foreach (var item in StartingArrayList)
             {
                 Console.Write(item + " ");
             }
+            Console.WriteLine();
+            Console.WriteLine("************");
+
+            var test = new ArrayList();
+            test.Add(2);
+            test.Add(3);
+            
+
+            LjubavHelpers.ljubav(StartingArrayList);
 
 
 
