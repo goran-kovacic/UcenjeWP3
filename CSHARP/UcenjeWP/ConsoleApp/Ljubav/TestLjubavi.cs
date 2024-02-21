@@ -44,13 +44,8 @@ namespace ConsoleApp.Ljubav
                 Console.Write(item + " ");
             }
             Console.WriteLine();
-            Console.WriteLine("************");
-
-            var test = new ArrayList();
-            test.Add(2);
-            test.Add(3);
+            Console.WriteLine("************");                      
             
-
             LjubavHelpers.ljubav(StartingArrayList);
 
 
