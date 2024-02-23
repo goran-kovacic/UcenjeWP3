@@ -6,6 +6,6 @@ internal class Program
 {
     private static void Main(string[] args)
     {
-        TestLjubavi.Run();
+        new ConsoleApp.E13Nasljedivanje.Program();
     }
 }
