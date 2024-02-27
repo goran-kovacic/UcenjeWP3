@@ -6,6 +6,6 @@ internal class Program
 {
     private static void Main(string[] args)
     {
-        new ConsoleApp.E13Nasljedivanje.Program();
+        new ConsoleApp.E14VjezbaObjekti.Program();
     }
 }
