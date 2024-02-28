@@ -29,17 +29,23 @@ namespace ConsoleApp.E14VjezbaObjekti
             Osobe.Add(new() { Ime = "Marko", Prezime = "Kekin", Dob = 14 });
         }
 
-        private void Izbornik()
+        private void Izbornik(int depth = 1)
         {
+            if (depth > 5)
+            {
+                Console.WriteLine("Maximum depth reached");
+                return;
+            }
+
             Console.WriteLine("1. Pregled osoba");
             Console.WriteLine("2. Unos nove osobe");
             Console.WriteLine("3. Promjena osobe");
             Console.WriteLine("4. Brisanje osobe");
             Console.WriteLine("5. Izlaz iz programa");
-            OdaberiOpciju();
+            OdaberiOpciju(depth);
         }
 
-        private void OdaberiOpciju()
+        private void OdaberiOpciju(int depth)
         {
             switch (Pomocno.UcitajCijeliBroj("Odaberi opciju"))
             {
@@ -63,7 +69,8 @@ namespace ConsoleApp.E14VjezbaObjekti
                     Console.WriteLine("*****************");
                     break;
             }
-            Izbornik();
+            Console.WriteLine("Recursion depth: " + depth);
+            Izbornik(depth + 1);
         }
 
         private void BrisanjeOsobe()
