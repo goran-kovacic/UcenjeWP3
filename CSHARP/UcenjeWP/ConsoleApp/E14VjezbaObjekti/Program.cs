@@ -31,11 +31,11 @@ namespace ConsoleApp.E14VjezbaObjekti
 
         private void Izbornik(int depth = 1)
         {
-            if (depth > 5)
-            {
-                Console.WriteLine("Maximum depth reached");
-                return;
-            }
+            // if (depth > 5)
+            // {
+            //     Console.WriteLine("Maximum depth reached");
+            //     return;
+            // }
 
             Console.WriteLine("1. Pregled osoba");
             Console.WriteLine("2. Unos nove osobe");
