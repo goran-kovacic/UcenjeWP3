@@ -26,6 +26,35 @@
             }
         }
 
+        public static int ucitajBrojRaspon(string poruka, string greska,
+            int poc, int kraj, int prekid)
+        {
+            int b;
+            while (true)
+            {
+                Console.Write(poruka);
+                try
+                {
+                    b = int.Parse(Console.ReadLine());
+                    if (b == prekid)
+                    {
+                        return b;
+                    }
+
+                    if (b >= poc && b <= kraj)
+                    {
+                        return b;
+                    }
+                    Console.WriteLine(greska);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(greska);
+                }
+            }
+        }
+
+
         internal static int ucitajCijeliBroj(string poruka, string greska)
         {
             int b;
