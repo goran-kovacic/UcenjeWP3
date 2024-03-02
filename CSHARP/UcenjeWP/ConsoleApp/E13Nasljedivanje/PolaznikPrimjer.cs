@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp.E13Nasljedivanje
 {
-    internal class Polaznik:Osoba
+    internal class PolaznikPrimjer:Osoba
     {
-        public Polaznik():base() { }
+        public PolaznikPrimjer():base() { }
 
-        public Polaznik(string ime, string prezime, string brojUgovora):base(ime, prezime)
+        public PolaznikPrimjer(string ime, string prezime, string brojUgovora):base(ime, prezime)
         {
             this.brojUgovora=brojUgovora;
         }

@@ -21,8 +21,8 @@ namespace ConsoleApp.E13Nasljedivanje
         }
         private void Primjer4()
         {
-            Polaznik p1 = new() { Ime = "Iva" };
-            Polaznik p2 = new() { Ime = "Iva" };
+            PolaznikPrimjer p1 = new() { Ime = "Iva" };
+            PolaznikPrimjer p2 = new() { Ime = "Iva" };
 
             Console.WriteLine(p1 == p2); // što će ispisati
 

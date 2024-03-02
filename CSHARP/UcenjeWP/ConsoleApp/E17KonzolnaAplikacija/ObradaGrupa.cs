@@ -1,4 +1,5 @@
-﻿using ConsoleApp.E17KonzolnaAplikacija.Model;
+﻿using ConsoleApp.E13Nasljedivanje;
+using ConsoleApp.E17KonzolnaAplikacija.Model;
 
 namespace ConsoleApp.E17KonzolnaAplikacija
 {
@@ -101,11 +102,43 @@ namespace ConsoleApp.E17KonzolnaAplikacija
         private List<Polaznik> IzmjeniPolaznike(int index)
         {
             List<Polaznik> polaznici = Grupe[index].Polaznici;
-            while (Pomocno.ucitajBool("Zelite li dodati polaznike? (da ili bilo sto drugo za ne): "))
-            {
-                polaznici.Add(PostaviPolaznika());
+            while (Pomocno.ucitajBool("Zelite li mijenjati polaznike? (da ili bilo sto drugo za ne): "))
+            {                
+                switch(Pomocno.ucitajBrojRaspon("Zelite li (1)dodati ili (2)obrisati polaznika? 0 za prekid: ", "Odabir mora biti 1,2 ili 0!",
+                    1, 2, 0))
+                {
+                    case 1:
+                        polaznici.Add(PostaviPolaznika());
+                        break;
+                    case 2:
+                        ObrisiPolaznika(polaznici);
+                        break;
+                    case 0:                        
+                        break;
+                }
             }
             return polaznici;
+        }
+
+        private void ObrisiPolaznika(List<Polaznik> polaznici)
+        {
+            Console.WriteLine("------------------");
+            Console.WriteLine("---- Polaznici ----");
+            Console.WriteLine("------------------");
+            int b = 1;
+            foreach (Polaznik polaznik in polaznici)
+            {
+                Console.WriteLine("{0}. {1}", b++, polaznik);
+            }
+            Console.WriteLine("------------------");
+
+            int index = Pomocno.ucitajBrojRaspon("Odaberi redni broj polaznika: ", "Nije dobar odabir", 1, Izbornik.ObradaPolaznik.Polaznici.Count());
+            Console.Write("Jeste li sigurni da zelite obrisati polaznika {0}", polaznici[index - 1].Ime + " " + polaznici[index-1].Prezime);
+            if (Pomocno.ucitajBool("? da ili bilo sto drugo za ne: "))
+            {
+                polaznici.RemoveAt(index - 1);
+            }
+            
         }
 
         private List<Polaznik> PostaviPolaznike()
