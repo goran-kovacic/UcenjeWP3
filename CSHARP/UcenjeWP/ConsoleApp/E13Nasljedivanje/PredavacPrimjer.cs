@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp.E13Nasljedivanje
 {
-    internal class Predavac:Osoba
+    internal class PredavacPrimjer:Osoba
     {
         public string? Iban { get; set; }
         public override string ToString()
