@@ -58,6 +58,7 @@ namespace ConsoleApp.E17KonzolnaAplikacija
             PregledPolaznika();
             int index = Pomocno.ucitajBrojRaspon("Odaberi redni broj polaznika: ", "Nije dobar odabir", 1, Polaznici.Count());
             var p = Polaznici[index - 1];
+
             p.Sifra = Pomocno.ucitajCijeliBroj("Unesite šifra polaznika (" + p.Sifra + "): ",
                 "Unos mora biti pozitivni cijeli broj");
             p.Ime = Pomocno.UcitajString("Unesi ime polaznika (" + p.Ime + "): ", "Ime obavezno");

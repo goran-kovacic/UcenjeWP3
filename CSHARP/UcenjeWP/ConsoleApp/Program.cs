@@ -7,5 +7,6 @@ internal class Program
     private static void Main(string[] args)
     {
         new ConsoleApp.E17KonzolnaAplikacija.Izbornik();
+
     }
 }

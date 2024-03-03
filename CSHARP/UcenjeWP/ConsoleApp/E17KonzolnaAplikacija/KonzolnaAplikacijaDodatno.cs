@@ -2,8 +2,8 @@
 {
 
     // Nakon što ste napravili svoj rad na razini kao što je ova aplikacija odraditi prvo na ovoj aplikaciji:
-    // 1. Implementirati CRUD za Predavača
-    // 2. Implementirati brisanje polaznika s grupe
+    // 1. Implementirati CRUD za Predavača +++++
+    // 2. Implementirati brisanje polaznika s grupe ++++
     // 3. Implementirati odustajanje od promjene uz zadržavanje postojeće vrijednosti
     // 4. Implementirati kontrolu da šifre na istom tipu budu jedinstvene (npr. ne mogu biti dva smjera s istom vrijednošću šifre)
     // 5. Vizualno dotjerati aplikaciju (UI/UX)
