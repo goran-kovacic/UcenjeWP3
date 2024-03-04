@@ -13,8 +13,6 @@ namespace ConsoleApp.E17KonzolnaAplikacija
             {
                 TestniPodaci();
             }
-
-
         }
 
         public void PrikaziIzbornik()
@@ -64,33 +62,33 @@ namespace ConsoleApp.E17KonzolnaAplikacija
             int index = Pomocno.ucitajBrojRaspon("Odaberi redni broj smjera: ", "Nije dobar odabir", 1, Smjerovi.Count()) - 1;
             var s = Smjerovi[index];
 
-            int novaSifra = Pomocno.ucitajCijeliBroj("Unesite šifru smjera (" + s.Sifra + ") (Enter za nastavak): ",
+            int novaSifra = Pomocno.promijeniCijeliBroj("Unesite šifru smjera (" + s.Sifra + ") (Enter za nastavak): ",
                 "Unos mora biti pozitivni cijeli broj");
 
             while (Smjerovi.Exists(smjer => smjer.Sifra == novaSifra && smjer != s))
             {
                 Console.WriteLine("Postojeca sifra, unesi novu");
-                novaSifra = Pomocno.ucitajCijeliBroj("Unesite šifru smjera (" + s.Sifra + ") (Enter za nastavak): ",
+                novaSifra = Pomocno.promijeniCijeliBroj("Unesite šifru smjera (" + s.Sifra + ") (Enter za nastavak): ",
             "Unos mora biti pozitivni cijeli broj");
             }
             s.Sifra = novaSifra == 0 ? s.Sifra : novaSifra;
             Console.WriteLine();
 
-            string naziv = Pomocno.UcitajString("Unesite naziv smjera (" + s.Naziv + "): ",
+            string naziv = Pomocno.PromijeniString("Unesite naziv smjera (" + s.Naziv + "): ",
                 "Unos obavezan");
             s.Naziv = naziv == "" ? s.Naziv : naziv;
             Console.WriteLine();
 
-            int trajanje = Pomocno.ucitajCijeliBroj("Unesite trajanje smjera u satima (" + s.Trajanje + "): ",
+            int trajanje = Pomocno.promijeniCijeliBroj("Unesite trajanje smjera u satima (" + s.Trajanje + "): ",
                 "Unos mora biti cijeli pozitivni broj");
             s.Trajanje = trajanje == 0 ? s.Trajanje : trajanje;
             Console.WriteLine();
 
-            decimal cijena = Pomocno.ucitajDecimalniBroj("Unesite cijenu (. za decimalni dio) (" + s.Cijena + "): ", "Neispravan unos");
+            decimal cijena = Pomocno.promijeniDecimalniBroj("Unesite cijenu (. za decimalni dio) (" + s.Cijena + "): ", "Neispravan unos");
             s.Cijena = cijena == 0 ? s.Cijena : cijena;
             Console.WriteLine();
 
-            decimal upisnina = Pomocno.ucitajDecimalniBroj("Unesi upisninu (. za decimalni dio) (" + s.Upisnina + "): ", "Neispravan unos");
+            decimal upisnina = Pomocno.promijeniDecimalniBroj("Unesi upisninu (. za decimalni dio) (" + s.Upisnina + "): ", "Neispravan unos");
             s.Upisnina = upisnina == 0 ? s.Upisnina : upisnina;
             Console.WriteLine();
 
@@ -120,15 +118,13 @@ namespace ConsoleApp.E17KonzolnaAplikacija
 
             int sifra = Pomocno.ucitajCijeliBroj("Unesite šifra smjera: ",
                 "Unos mora biti pozitivni cijeli broj");
-            //s.Sifra = Pomocno.ucitajCijeliBroj("Unesite šifra smjera: ",
-            //    "Unos mora biti pozitivni cijeli broj");
             while(Smjerovi.Exists(smjer => smjer.Sifra == sifra))
             {
                 Console.WriteLine("Postojeca sifra, unesi novu");
                 sifra = Pomocno.ucitajCijeliBroj("Unesite šifra smjera: ",
                 "Unos mora biti pozitivni cijeli broj");
             }
-
+            
             s.Naziv = Pomocno.UcitajString("Unesite naziv smjera: ",
                 "Unos obavezan");
             s.Trajanje = Pomocno.ucitajCijeliBroj("Unesite trajanje smjera u satima: ",
@@ -146,12 +142,7 @@ namespace ConsoleApp.E17KonzolnaAplikacija
             Console.WriteLine("---- Smjerovi ----");
             Console.WriteLine("------------------");
             int b = 1;
-            foreach (Smjer smjer in Smjerovi)
-            {
-                //Console.WriteLine("{0}. {1} ({2})",b++,smjer.Naziv,smjer.Trajanje);
-                Console.WriteLine(b++ + ". " + smjer.Naziv + " (" + smjer.Trajanje + ") Cijena: " + smjer.Cijena + ", Upisnina: " + smjer.Upisnina
-                    + ", Verificiran: " + (smjer.Verificiran ? "Da" : "Ne"));                
-            }
+            Smjerovi.ForEach(smjer => Console.WriteLine("{0}. {1}", b++, smjer));            
             Console.WriteLine("------------------");
         }
 

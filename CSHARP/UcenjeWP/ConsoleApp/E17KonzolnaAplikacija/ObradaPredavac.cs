@@ -48,16 +48,19 @@ namespace ConsoleApp.E17KonzolnaAplikacija
                 case 2:
                     UnosNovogPredavaca();
                     Console.Clear();
+                    PrikaziPredavace();
                     PrikaziIzbornik();
                     break;
                 case 3:
                     PromjenaPredavaca();
                     Console.Clear();
+                    PrikaziPredavace();
                     PrikaziIzbornik();
                     break;
                 case 4:
                     BrisanjePredavac();
                     Console.Clear();
+                    PrikaziPredavace();
                     PrikaziIzbornik();
                     break;
                 case 5:
@@ -78,22 +81,55 @@ namespace ConsoleApp.E17KonzolnaAplikacija
             PrikaziPredavace();
             int index = Pomocno.ucitajBrojRaspon("Odaberi redni broj predavaca: ", "Nije dobar odabir", 1, Predavaci.Count());
             Predavac p = Predavaci[index - 1];
-            p.Ime = Pomocno.UcitajString("Unesi ime predavaca (" + p.Ime + "): ", "Ime obavezno");
-            p.Prezime = Pomocno.UcitajString("Unesi Prezime predavaca (" + p.Prezime + "): ", "Prezime obavezno");
-            p.Email = Pomocno.UcitajString("Unesi Email predavaca (" + p.Email + "): ", "Email obavezno");
-            p.OIB = Pomocno.UcitajString("Unesi OIB predavaca (" + p.OIB + "): ", "OIB obavezno");
-            p.IBAN = Pomocno.UcitajString("Unesi IBAN predavaca(" + p.IBAN + "): ", "IBAN obavezno");
+
+            int novaSifra = Pomocno.promijeniCijeliBroj("Unesi sifru predavaca (" + p.Sifra + ") (Enter za nastavak): ",
+                "Unos mora biti pozitivan cijeli broj");
+            while(Predavaci.Exists(pred => pred.Sifra == novaSifra && pred != p))
+            {
+                Console.WriteLine("Postojeca sifra, unesi novu");
+                novaSifra = Pomocno.promijeniCijeliBroj("Unesi sifru predavaca (" + p.Sifra + ") (Enter za nastavak): ",
+                "Unos mora biti pozitivan cijeli broj");
+            }
+            p.Sifra = novaSifra == 0 ? p.Sifra : novaSifra;
+
+            string novoIme = Pomocno.PromijeniString("Unesite ime (" + p.Ime + "): ",
+                "Unos obavezan");
+            p.Ime = novoIme == "" ? p.Ime : novoIme;
+
+
+            string novoPrezime = Pomocno.PromijeniString("Unesite prezime (" + p.Prezime + "): ",
+                "Unos obavezan");
+            p.Prezime = novoPrezime == "" ? p.Prezime : novoPrezime;
+
+            string noviEmail = Pomocno.PromijeniString("Unesite email (" + p.Email + "): ",
+                "Unos obavezan");
+            p.Email = noviEmail == "" ? p.Email : noviEmail;
+
+            string noviOIB = Pomocno.PromijeniString("Unesite OIB (" + p.OIB + "): ",
+                "Unos obavezan");
+            p.OIB = noviOIB == "" ? p.OIB : noviOIB;
+
+            string noviIBAN = Pomocno.PromijeniString("Unesite IBAN (" + p.IBAN + "): ",
+                "Unos obavezan");
+            p.IBAN = noviIBAN == "" ? p.IBAN : noviIBAN;
         }
 
         private void UnosNovogPredavaca()
         {
             Predavac p = new Predavac();
-            p.Sifra = Pomocno.ucitajCijeliBroj("Unesi sifru predavaca: ", "Unos mora biti pozitivan broj");
+
+            int sifra = Pomocno.ucitajCijeliBroj("Unesi sifru predavaca: ", "Unos mora biti pozitivan broj");
+            while(Predavaci.Exists(pr => pr.Sifra == sifra))
+            {
+                Console.WriteLine("Postojeca sifra, unesi novu");
+                sifra = Pomocno.ucitajCijeliBroj("Unesi sifru predavaca: ", "Unos mora biti pozitivan broj");
+            }
+                        
             p.Ime = Pomocno.UcitajString("Unesi ime: ", "Ime obavezno");
             p.Prezime = Pomocno.UcitajString("Unesi Prezime predavaca: ", "Prezime obavezno");
             p.Email = Pomocno.UcitajString("Unesi Email predavaca: ", "Email obavezno");
             p.OIB = Pomocno.UcitajString("Unesi OIB predavaca: ", "OIB obavezno");
-            p.IBAN = Pomocno.UcitajString("Unesi IBAN predavaca: ", "OIB obavezno");
+            p.IBAN = Pomocno.UcitajString("Unesi IBAN predavaca: ", "IBAN obavezno");
             Predavaci.Add(p);
         }
 
@@ -103,10 +139,11 @@ namespace ConsoleApp.E17KonzolnaAplikacija
             Console.WriteLine("---- Predavaci ----");
             Console.WriteLine("-------------------");
             int counter = 1;
-            foreach(Predavac p in Predavaci)
-            {
-                Console.WriteLine("{0}. {1}", counter++, p);
-            }
+            Predavaci.ForEach(predavac => Console.WriteLine("{0}. {1}", counter++, predavac));
+            //foreach(Predavac p in Predavaci)
+            //{
+            //    Console.WriteLine("{0}. {1}", counter++, p);
+            //}
             Console.WriteLine("-------------------");
         }
 

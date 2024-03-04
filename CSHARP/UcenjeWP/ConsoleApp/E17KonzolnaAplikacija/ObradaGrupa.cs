@@ -1,5 +1,6 @@
 ﻿using ConsoleApp.E13Nasljedivanje;
 using ConsoleApp.E17KonzolnaAplikacija.Model;
+using System.Security.Cryptography;
 
 namespace ConsoleApp.E17KonzolnaAplikacija
 {
@@ -33,6 +34,16 @@ namespace ConsoleApp.E17KonzolnaAplikacija
                 Polaznici = Izbornik.ObradaPolaznik.Polaznici.GetRange(0, 5),
                 DatumPocetka = DateTime.Now,
                 Predavac = Izbornik.ObradaPredavac.Predavaci[0]
+            });
+
+            Grupe.Add(new Grupa()
+            {
+                Sifra = 2,
+                Naziv = "JP28",
+                Smjer = Izbornik.ObradaSmjer.Smjerovi[1],
+                //Polaznici = Izbornik.ObradaPolaznik.Polaznici.GetRange(0, 5),
+                DatumPocetka = DateTime.Now,
+                //Predavac = Izbornik.ObradaPredavac.Predavaci[0]
             });
         }
 
@@ -79,33 +90,58 @@ namespace ConsoleApp.E17KonzolnaAplikacija
             PrikaziGrupe();
             int index = Pomocno.ucitajBrojRaspon("Odaberi redni broj grupe: ", "Nije dobar odabir", 1, Grupe.Count());
             var p = Grupe[index - 1];
-            p.Sifra = Pomocno.ucitajCijeliBroj("Unesite šifra grupe (" + p.Sifra + "): ",
+
+            int novaSifra = Pomocno.promijeniCijeliBroj("Unesite šifra grupe (" + p.Sifra + "): ",
                 "Unos mora biti pozitivni cijeli broj");
-            p.Naziv = Pomocno.UcitajString("Unesite naziv grupe (" + p.Naziv + "): ",
+            while(Grupe.Exists(grup => grup.Sifra == novaSifra && grup != p)) 
+            {
+                Console.WriteLine("Postojeca sifra, unesi novu");
+                novaSifra = Pomocno.promijeniCijeliBroj("Unesite šifra grupe (" + p.Sifra + "): ",
+                "Unos mora biti pozitivni cijeli broj");
+            }
+            p.Sifra = novaSifra == 0 ? p.Sifra : novaSifra;
+
+
+            string naziv = Pomocno.PromijeniString("Unesite naziv grupe (" + p.Naziv + "): ",
                 "Unos obavezan");
+            p.Naziv = naziv == "" ? p.Naziv : naziv;
+
             Console.WriteLine("Trenutni smjer: {0}", p.Smjer.Naziv);
-            p.Smjer = PostaviSmjer();
+            int indexSmjera = p.Smjer.Sifra;
+            p.Smjer = PromijeniSmjer(indexSmjera-1);
             Console.WriteLine("Trenutni polaznici:");
             Console.WriteLine("------------------");
             Console.WriteLine("---- Polaznici ----");
             Console.WriteLine("------------------");
             int b = 1;
-            foreach (Polaznik polaznik in p.Polaznici)
+            if (p.Polaznici != null)
             {
-                Console.WriteLine("{0}. {1}", b++, polaznik);
+
+                foreach (Polaznik polaznik in p.Polaznici)
+                {
+                    Console.WriteLine("{0}. {1}", b++, polaznik);
+                }
             }
             Console.WriteLine("------------------");
             p.Polaznici = IzmjeniPolaznike(index - 1);
-            p.Predavac = PostaviPredavaca();
+            if (p.Predavac != null)
+            {
+                int indexPredavaca = p.Predavac.Sifra;
+                p.Predavac = PromijeniPredavaca(indexPredavaca - 1);
+            }else if (p.Predavac == null)
+            {
+                p.Predavac = PostaviPredavaca();
+            }
+            
         }
 
-        private List<Polaznik> IzmjeniPolaznike(int index)
+        private List<Polaznik>? IzmjeniPolaznike(int index)
         {
             List<Polaznik> polaznici = Grupe[index].Polaznici;
             while (Pomocno.ucitajBool("Zelite li mijenjati polaznike? (da ili bilo sto drugo za ne): "))
             {                
-                switch(Pomocno.ucitajBrojRaspon("Zelite li (1)dodati ili (2)obrisati polaznika? 0 za prekid: ", "Odabir mora biti 1,2 ili 0!",
-                    1, 2, 0))
+                switch(Pomocno.ucitajBrojRaspon("Zelite li (1)dodati ili (2)obrisati polaznika? Enter za prekid: ", "Odabir mora biti 1,2 ili 0!",
+                    1, 2, ""))
                 {
                     case 1:
                         polaznici.Add(PostaviPolaznika());
@@ -167,6 +203,17 @@ namespace ConsoleApp.E17KonzolnaAplikacija
             return Izbornik.ObradaSmjer.Smjerovi[index - 1];
         }
 
+        private Smjer PromijeniSmjer(int indexSmjera)
+        {
+            Izbornik.ObradaSmjer.PrikaziSmjerove();
+            int index = Pomocno.ucitajBrojRaspon("Odaberi redni broj smjera: ", "Nije dobar odabir", 1, Izbornik.ObradaSmjer.Smjerovi.Count(), "");
+            if(index == 0)
+            {
+                return Izbornik.ObradaSmjer.Smjerovi[indexSmjera];
+            }
+            return Izbornik.ObradaSmjer.Smjerovi[index - 1];
+        }
+
         private void BrisanjeGrupe()
         {
             PrikaziGrupe();
@@ -177,8 +224,16 @@ namespace ConsoleApp.E17KonzolnaAplikacija
         private void UnosNovogGrupe()
         {
             var g = new Grupa();
-            g.Sifra = Pomocno.ucitajCijeliBroj("Unesite šifra grupe: ",
+
+            int sifra = Pomocno.ucitajCijeliBroj("Unesite šifra grupe: ",
                 "Unos mora biti pozitivni cijeli broj");
+            while(Grupe.Exists(gr => gr.Sifra == sifra))
+            {
+                Console.WriteLine("Postojeca sifra, unesi novu");
+                sifra = Pomocno.ucitajCijeliBroj("Unesite šifra grupe: ",
+                "Unos mora biti pozitivni cijeli broj");
+            }
+            
             g.Naziv = Pomocno.UcitajString("Unesite naziv grupe: ",
                 "Unos obavezan");
             g.Smjer = PostaviSmjer();
@@ -192,10 +247,21 @@ namespace ConsoleApp.E17KonzolnaAplikacija
         private Predavac PostaviPredavaca()
         {
             Izbornik.ObradaPredavac.PrikaziPredavace();
-            int index = Pomocno.ucitajBrojRaspon("Odaber redni broj predavaca (0 za prekid): ", "Nije dobar unos", 1, Izbornik.ObradaPredavac.Predavaci.Count(), 0);
+            int index = Pomocno.ucitajBrojRaspon("Odaber redni broj predavaca (enter za prekid): ", "Nije dobar unos", 1, Izbornik.ObradaPredavac.Predavaci.Count(), "");
             if (index == 0)
             {
                 return null;
+            }
+            return Izbornik.ObradaPredavac.Predavaci[index - 1];
+        }
+
+        private Predavac PromijeniPredavaca(int indexPredavaca)
+        {
+            Izbornik.ObradaPredavac.PrikaziPredavace();
+            int index = Pomocno.ucitajBrojRaspon("Odaber redni broj predavaca (enter za prekid): ", "Nije dobar unos", 1, Izbornik.ObradaPredavac.Predavaci.Count(), "");
+            if(index == 0)
+            {
+                return Izbornik.ObradaPredavac.Predavaci[indexPredavaca];
             }
             return Izbornik.ObradaPredavac.Predavaci[index - 1];
         }
@@ -212,18 +278,32 @@ namespace ConsoleApp.E17KonzolnaAplikacija
                 if (grupa.Predavac == null)
                 {
                     Console.WriteLine("{0}. {1} ({2}, predavac: NEMA)", b++, grupa.Naziv, grupa.Smjer.Naziv);
-                    foreach (Polaznik p in grupa.Polaznici)
+                    if (grupa.Polaznici == null)
                     {
-                        Console.WriteLine("\t" + p);
+                        Console.WriteLine("\tGrupa nema polaznika");
+                    }
+                    else
+                    {
+                        foreach (Polaznik p in grupa.Polaznici)
+                        {
+                            Console.WriteLine("\t" + p);
+                        }
                     }
                 }
                 else
                 {
 
                     Console.WriteLine("{0}. {1} ({2}, predavac: {3})", b++, grupa.Naziv, grupa.Smjer.Naziv, grupa.Predavac.ToString());
-                    foreach (Polaznik p in grupa.Polaznici)
+                    if (grupa.Polaznici == null)
                     {
-                        Console.WriteLine("\t" + p);
+                        Console.WriteLine("\tGrupa nema polaznika");
+                    }
+                    else
+                    {
+                        foreach (Polaznik p in grupa.Polaznici)
+                        {
+                            Console.WriteLine("\t" + p);
+                        }
                     }
                 }
             }

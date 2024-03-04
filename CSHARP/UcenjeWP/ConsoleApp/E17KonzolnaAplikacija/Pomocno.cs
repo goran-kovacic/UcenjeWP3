@@ -29,19 +29,26 @@ namespace ConsoleApp.E17KonzolnaAplikacija
         }
 
         public static int ucitajBrojRaspon(string poruka, string greska,
-            int poc, int kraj, int prekid)
+            int poc, int kraj, string prekid)
         {
             int b;
             while (true)
             {
                 Console.Write(poruka);
+                
                 try
                 {
-                    b = int.Parse(Console.ReadLine());
-                    if (b == prekid)
+                    prekid = Console.ReadLine();
+                    if (string.IsNullOrWhiteSpace(prekid))
                     {
-                        return b;
+                        return 0;
                     }
+
+                    b = int.Parse(prekid);
+                    //if (b == prekid)
+                    //{
+                    //    return b;
+                    //}
 
                     if (b >= poc && b <= kraj)
                     {
@@ -56,27 +63,36 @@ namespace ConsoleApp.E17KonzolnaAplikacija
             }
         }
 
-
         internal static int ucitajCijeliBroj(string poruka, string greska)
         {
-            //int b;
-            
+            int b;
+            while (true)
+            {
+                Console.Write(poruka);
+                try
+                {
+                    b = int.Parse(Console.ReadLine());
+                    if (b > 0)
+                    {
+                        return b;
+                    }
+                    Console.WriteLine(greska);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(greska);
+                }
+            }
+        }
+
+        internal static int promijeniCijeliBroj(string poruka, string greska)
+        {
             while(true)
             {
                 Console.Write(poruka);
                 string input = Console.ReadLine();
                 try
                 {
-                    //b = int.Parse(Console.ReadLine());
-                    //if (b > 0)
-                    //{
-                    //    return b;
-                    //}
-                    //else if (Console.ReadKey(true).Key == ConsoleKey.Enter)
-                    //{
-                    //    return 0;
-                    //}
-
                     if (string.IsNullOrWhiteSpace(input))
                     {
                         return 0;
@@ -100,30 +116,45 @@ namespace ConsoleApp.E17KonzolnaAplikacija
 
         internal static decimal ucitajDecimalniBroj(string poruka, string greska)
         {
+            decimal b;
+            while (true)
+            {
+                Console.Write(poruka);
+                try
+                {
+                    b = decimal.Parse(Console.ReadLine());
+                    if (b > 0)
+                    {
+                        return b;
+                    }
+                    Console.WriteLine(greska);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(greska);
+                }
+            }
+        }
+
+        internal static decimal promijeniDecimalniBroj(string poruka, string greska)
+        {
             while (true)
             {
                 Console.Write(poruka);
                 string input = Console.ReadLine();
 
-                //try
-                //{
-                    if (string.IsNullOrWhiteSpace(input))
-                    {
-                        return 0;
-                    }
-                    if (decimal.TryParse(input, NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out decimal result) && result > 0)
-                    {
-                        return result;
-                    }
-                    else
-                    {
-                        Console.WriteLine(greska);
-                    }
-                //}
-                //catch (Exception ex)
-                //{
-                //    Console.WriteLine(greska);
-                //}
+                if (string.IsNullOrWhiteSpace(input))
+                {
+                    return 0;
+                }
+                if (decimal.TryParse(input, NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out decimal result) && result > 0)
+                {
+                    return result;
+                }
+                else
+                {
+                    Console.WriteLine(greska);
+                }
             }
         }
 
@@ -162,8 +193,22 @@ namespace ConsoleApp.E17KonzolnaAplikacija
 
         internal static string UcitajString(string poruka, string greska)
         {
-            
-            while(true)
+            string s = "";
+            while (true)
+            {
+                Console.Write(poruka);
+                s = Console.ReadLine();
+                if (s != null && s.Trim().Length > 0)
+                {
+                    return s;
+                }
+                Console.WriteLine(greska);
+            }
+        }
+
+        internal static string PromijeniString(string poruka, string greska)
+        {
+            while (true)
             {
                 Console.Write(poruka);
                 string input = Console.ReadLine();
@@ -171,7 +216,7 @@ namespace ConsoleApp.E17KonzolnaAplikacija
                 {
                     return "";
                 }
-                if (input!=null && input.Trim().Length > 0)
+                if (input != null && input.Trim().Length > 0)
                 {
                     return input;
                 }

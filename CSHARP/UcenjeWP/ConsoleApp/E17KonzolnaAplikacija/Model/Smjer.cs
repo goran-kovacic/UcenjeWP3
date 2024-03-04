@@ -1,4 +1,6 @@
-﻿namespace ConsoleApp.E17KonzolnaAplikacija.Model
+﻿using ConsoleApp.E12KlasaObjekt.Edunova;
+
+namespace ConsoleApp.E17KonzolnaAplikacija.Model
 {
     internal class Smjer : Entitet
     {
@@ -7,5 +9,12 @@
         public decimal Cijena { get; set; }
         public decimal Upisnina { get; set; }
         public bool Verificiran { get; set; }
+
+        public override string ToString()
+        {
+            return Naziv + " (" + Trajanje + ") Cijena: " + Cijena + ", Upisnina: " + Upisnina
+            + ", Verificiran: " + (Verificiran ? "Da" : "Ne");
+        }
     }
+
 }

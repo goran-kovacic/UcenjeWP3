@@ -30,26 +30,31 @@ namespace ConsoleApp.E17KonzolnaAplikacija
             {
                 
                 case 1:
+                    Console.Clear();
                     PregledPolaznika();
                     PrikaziIzbornik();
                     break;
                 case 2:
                     UcitajPolaznika();
+                    Console.Clear();
+                    PregledPolaznika();
                     PrikaziIzbornik();
                     break;
                 case 3:
                     PromjenaPolaznika();
+                    Console.Clear();
+                    PregledPolaznika();
                     PrikaziIzbornik();
                     break;
                 case 4:
                     BrisanjePolaznika();
+                    Console.Clear();
+                    PregledPolaznika();
                     PrikaziIzbornik();
                     break;
                 case 5:
                     Console.WriteLine("Gotov rad s polaznicima");
                     break;
-
-
             }
         }
 
@@ -59,12 +64,31 @@ namespace ConsoleApp.E17KonzolnaAplikacija
             int index = Pomocno.ucitajBrojRaspon("Odaberi redni broj polaznika: ", "Nije dobar odabir", 1, Polaznici.Count());
             var p = Polaznici[index - 1];
 
-            p.Sifra = Pomocno.ucitajCijeliBroj("Unesite šifra polaznika (" + p.Sifra + "): ",
+            int novaSifra = Pomocno.promijeniCijeliBroj("Unesite šifra polaznika (" + p.Sifra + "): ",
                 "Unos mora biti pozitivni cijeli broj");
-            p.Ime = Pomocno.UcitajString("Unesi ime polaznika (" + p.Ime + "): ", "Ime obavezno");
-            p.Prezime = Pomocno.UcitajString("Unesi Prezime polaznika (" + p.Prezime + "): ", "Prezime obavezno");
-            p.Email = Pomocno.UcitajString("Unesi Email polaznika (" + p.Email + "): ", "Email obavezno");
-            p.Oib = Pomocno.UcitajString("Unesi OIB polaznika (" + p.Oib + "): ", "OIB obavezno");
+            while(Polaznici.Exists(polazn => polazn.Sifra == novaSifra && polazn != p)) 
+            {
+                Console.WriteLine("Postojeca sifra, unesi novu");
+                novaSifra = Pomocno.promijeniCijeliBroj("Unesite šifra polaznika (" + p.Sifra + "): ",
+                "Unos mora biti pozitivni cijeli broj");
+            }
+            p.Sifra = novaSifra == 0 ? p.Sifra : novaSifra;
+            Console.WriteLine();
+
+            string novoIme = Pomocno.PromijeniString("Unesi ime polaznika (" + p.Ime + "): ", "Ime obavezno");
+            p.Ime = novoIme == "" ? p.Ime : novoIme;
+            Console.WriteLine();
+
+            string novoPrezime = Pomocno.PromijeniString("Unesi Prezime polaznika (" + p.Prezime + "): ", "Prezime obavezno");
+            p.Prezime = novoPrezime == "" ? p.Prezime : novoPrezime;
+            Console.WriteLine();
+
+            string noviEmail = Pomocno.PromijeniString("Unesi Email polaznika (" + p.Email + "): ", "Email obavezno");
+            p.Email = noviEmail == "" ? p.Email : noviEmail;
+            Console.WriteLine();
+
+            string noviOIB = Pomocno.PromijeniString("Unesi OIB polaznika (" + p.Oib + "): ", "OIB obavezno");
+            p.Oib = noviOIB == "" ? p.Oib : noviOIB;
         }
 
         private void BrisanjePolaznika()
@@ -80,18 +104,23 @@ namespace ConsoleApp.E17KonzolnaAplikacija
             Console.WriteLine("---- Polaznici ----");
             Console.WriteLine("------------------");
             int b = 1;
-            foreach (Polaznik polaznik  in Polaznici)
-            {
-                Console.WriteLine("{0}. {1}", b++, polaznik);
-            }
+            Polaznici.ForEach(pol => Console.WriteLine("{0}. {1}", b++, pol));
             Console.WriteLine("------------------");
         }
 
         private void UcitajPolaznika()
         {
             var p = new Polaznik();
-            p.Sifra = Pomocno.ucitajCijeliBroj("Unesite šifra polaznika: ",
+
+            int sifra = Pomocno.ucitajCijeliBroj("Unesite šifra polaznika: ",
                 "Unos mora biti pozitivni cijeli broj");
+            while(Polaznici.Exists(pol => pol.Sifra == sifra))
+            {
+                Console.WriteLine("Postojeca sifra, unesi novu");
+                sifra = Pomocno.ucitajCijeliBroj("Unesite šifra polaznika: ",
+                "Unos mora biti pozitivni cijeli broj");
+            }
+            
             p.Ime = Pomocno.UcitajString("Unesi ime polaznika: ", "Ime obavezno");
             p.Prezime = Pomocno.UcitajString("Unesi Prezime polaznika: ", "Prezime obavezno");
             p.Email = Pomocno.UcitajString("Unesi Email polaznika: ", "Email obavezno");
@@ -104,12 +133,14 @@ namespace ConsoleApp.E17KonzolnaAplikacija
         {
 
             for(int i=0;i<20; i++) {
+                string name = Faker.Name.First();
+                string lastName = Faker.Name.Last();
                 Polaznici.Add(new Polaznik
                 {
-                    Sifra = i+1,
-                    Ime = Faker.Name.First(),
-                    Prezime = Faker.Name.Last(),
-                    Email = Faker.Internet.Email(),
+                    Sifra = i+1,                    
+                    Ime = name,
+                    Prezime = lastName,
+                    Email = name.ToLower() + "." + lastName.ToLower() + "@" + Faker.Internet.DomainName(),
                     Oib = Faker.Identification.SocialSecurityNumber()
                 });
             }
