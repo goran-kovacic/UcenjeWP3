@@ -65,12 +65,12 @@ namespace ConsoleApp.E17KonzolnaAplikacija
             var p = Polaznici[index - 1];
 
             int novaSifra = Pomocno.promijeniCijeliBroj("Unesite šifra polaznika (" + p.Sifra + "): ",
-                "Unos mora biti pozitivni cijeli broj");
+                "Unos mora biti pozitivni cijeli broj", "");
             while(Polaznici.Exists(polazn => polazn.Sifra == novaSifra && polazn != p)) 
             {
                 Console.WriteLine("Postojeca sifra, unesi novu");
                 novaSifra = Pomocno.promijeniCijeliBroj("Unesite šifra polaznika (" + p.Sifra + "): ",
-                "Unos mora biti pozitivni cijeli broj");
+                "Unos mora biti pozitivni cijeli broj", "");
             }
             p.Sifra = novaSifra == 0 ? p.Sifra : novaSifra;
             Console.WriteLine();

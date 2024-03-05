@@ -85,12 +85,12 @@ namespace ConsoleApp.E17KonzolnaAplikacija
             }
         }
 
-        internal static int promijeniCijeliBroj(string poruka, string greska)
+        internal static int promijeniCijeliBroj(string poruka, string greska, string input)
         {
             while(true)
             {
                 Console.Write(poruka);
-                string input = Console.ReadLine();
+                input = Console.ReadLine();
                 try
                 {
                     if (string.IsNullOrWhiteSpace(input))

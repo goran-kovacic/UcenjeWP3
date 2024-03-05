@@ -83,12 +83,12 @@ namespace ConsoleApp.E17KonzolnaAplikacija
             Predavac p = Predavaci[index - 1];
 
             int novaSifra = Pomocno.promijeniCijeliBroj("Unesi sifru predavaca (" + p.Sifra + ") (Enter za nastavak): ",
-                "Unos mora biti pozitivan cijeli broj");
+                "Unos mora biti pozitivan cijeli broj", "");
             while(Predavaci.Exists(pred => pred.Sifra == novaSifra && pred != p))
             {
                 Console.WriteLine("Postojeca sifra, unesi novu");
                 novaSifra = Pomocno.promijeniCijeliBroj("Unesi sifru predavaca (" + p.Sifra + ") (Enter za nastavak): ",
-                "Unos mora biti pozitivan cijeli broj");
+                "Unos mora biti pozitivan cijeli broj","");
             }
             p.Sifra = novaSifra == 0 ? p.Sifra : novaSifra;
 

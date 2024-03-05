@@ -26,7 +26,7 @@ namespace ConsoleApp.E17KonzolnaAplikacija
             PrikaziIzbornik();
         }
 
-        private void UpdateTestniPodaciZaSmjer()
+        public void UpdateTestniPodaciZaSmjer()
         {
             foreach (Smjer smjer in ObradaSmjer.Smjerovi)
             {

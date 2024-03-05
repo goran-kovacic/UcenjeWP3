@@ -77,16 +77,19 @@ namespace ConsoleApp.E17KonzolnaAplikacija
                     break;
                 case 2:
                     UnosNovogGrupe();
+                    Izbornik.UpdateTestniPodaciZaSmjer();
                     Console.Clear();
                     PrikaziIzbornik();
                     break;
                 case 3:
                     PromjenaGrupe();
+                    Izbornik.UpdateTestniPodaciZaSmjer();
                     Console.Clear();
                     PrikaziIzbornik();
                     break;
                 case 4:
                     BrisanjeGrupe();
+                    Izbornik.UpdateTestniPodaciZaSmjer();
                     Console.Clear();
                     PrikaziIzbornik();
                     break;
@@ -122,14 +125,13 @@ namespace ConsoleApp.E17KonzolnaAplikacija
 
         private void UkupanIznosPrihodaPoSmjerovima()
         {
-            //Console.Write("Ukupan iznos prihoda po smjerovima: ");
-
             decimal prihod;
             foreach (Smjer smjer in Izbornik.ObradaSmjer.Smjerovi)
             {
                 prihod = 0;
                 if (smjer.GrupeUSmjeru == null || smjer.GrupeUSmjeru.Count() == 0)
                 {
+                    Console.WriteLine("Prihod smjera {0}: Nema unesenih grupa", smjer.Naziv);
                     continue;
                 }
                 foreach(Grupa grupa in smjer.GrupeUSmjeru)
@@ -175,12 +177,12 @@ namespace ConsoleApp.E17KonzolnaAplikacija
             var p = Grupe[index - 1];
 
             int novaSifra = Pomocno.promijeniCijeliBroj("Unesite šifra grupe (" + p.Sifra + "): ",
-                "Unos mora biti pozitivni cijeli broj");
+                "Unos mora biti pozitivni cijeli broj", "");
             while(Grupe.Exists(grup => grup.Sifra == novaSifra && grup != p)) 
             {
                 Console.WriteLine("Postojeca sifra, unesi novu");
                 novaSifra = Pomocno.promijeniCijeliBroj("Unesite šifra grupe (" + p.Sifra + "): ",
-                "Unos mora biti pozitivni cijeli broj");
+                "Unos mora biti pozitivni cijeli broj", "");
             }
             p.Sifra = novaSifra == 0 ? p.Sifra : novaSifra;
 

@@ -64,13 +64,13 @@ namespace ConsoleApp.E17KonzolnaAplikacija
             var s = Smjerovi[index];
 
             int novaSifra = Pomocno.promijeniCijeliBroj("Unesite šifru smjera (" + s.Sifra + ") (Enter za nastavak): ",
-                "Unos mora biti pozitivni cijeli broj");
+                "Unos mora biti pozitivni cijeli broj","");
 
             while (Smjerovi.Exists(smjer => smjer.Sifra == novaSifra && smjer != s))
             {
                 Console.WriteLine("Postojeca sifra, unesi novu");
                 novaSifra = Pomocno.promijeniCijeliBroj("Unesite šifru smjera (" + s.Sifra + ") (Enter za nastavak): ",
-            "Unos mora biti pozitivni cijeli broj");
+            "Unos mora biti pozitivni cijeli broj", "");
             }
             s.Sifra = novaSifra == 0 ? s.Sifra : novaSifra;
             Console.WriteLine();
@@ -81,7 +81,7 @@ namespace ConsoleApp.E17KonzolnaAplikacija
             Console.WriteLine();
 
             int trajanje = Pomocno.promijeniCijeliBroj("Unesite trajanje smjera u satima (" + s.Trajanje + "): ",
-                "Unos mora biti cijeli pozitivni broj");
+                "Unos mora biti cijeli pozitivni broj","");
             s.Trajanje = trajanje == 0 ? s.Trajanje : trajanje;
             Console.WriteLine();
 
