@@ -32,7 +32,7 @@ namespace ConsoleApp.E17KonzolnaAplikacija
                 Naziv = "WP3",
                 Smjer = Izbornik.ObradaSmjer.Smjerovi[0],
                 Polaznici = Izbornik.ObradaPolaznik.Polaznici.GetRange(0, 5),
-                DatumPocetka = DateTime.Now,
+                DatumPocetka = DateTime.Parse("2023-11-20 12:30:45"),
                 Predavac = Izbornik.ObradaPredavac.Predavaci[0]
             });
 
@@ -52,7 +52,7 @@ namespace ConsoleApp.E17KonzolnaAplikacija
                 Naziv = "JP28",
                 Smjer = Izbornik.ObradaSmjer.Smjerovi[1],
                 //Polaznici = Izbornik.ObradaPolaznik.Polaznici.GetRange(0, 5),
-                DatumPocetka = DateTime.Now,
+                DatumPocetka = DateTime.Parse("2024-05-30 12:30:45"),
                 //Predavac = Izbornik.ObradaPredavac.Predavaci[0]
             });
         }
@@ -114,8 +114,35 @@ namespace ConsoleApp.E17KonzolnaAplikacija
             ProsjekUGrupi();
             UkupanIznosPrihodaPoSmjerovima();
             ProsjecanIznosPrihodaPoPolazniku();
-
+            PocetakGrupa();
             Console.ReadKey();
+        }
+
+        private void PocetakGrupa()
+        {
+            Grupa najranijaGrupa = Grupe.OrderBy(grupa => grupa.DatumPocetka).First();
+            DateTime najranijiDatum = najranijaGrupa.DatumPocetka;
+            string nazivNajranijeGrupe = najranijaGrupa.Naziv;
+
+            Grupa najkasnijaGrupa = Grupe.OrderBy(grupa => grupa.DatumPocetka).Last();
+            DateTime najkasnijiDatum = najkasnijaGrupa.DatumPocetka;
+            string nazivNajkasnijeGrupe = najkasnijaGrupa.Naziv;
+
+            //DateTime najranijiDatum = Grupe.Min(grupa => grupa.DatumPocetka);            
+            //DateTime najkasnijiDatum = Grupe.Max(grupa => grupa.DatumPocetka);
+            TimeSpan difference = najkasnijiDatum - najranijiDatum;
+
+            Console.WriteLine($"Najraniji pocetak grupe: {najranijiDatum} ({nazivNajranijeGrupe})");
+            Console.WriteLine($"Najkasniji pocetak grupe: {najkasnijiDatum} ({nazivNajkasnijeGrupe})");
+            Console.WriteLine($"Razlika najranijeg i najkasnijeg pocetka grupe: {difference.TotalDays:0.##} dana");
+
+            //foreach (Grupa grupa in Grupe)
+            //{
+            //    if(grupa.DatumPocetka == null)
+            //    {
+            //        continue;
+            //    }
+            //}
         }
 
         private void ProsjecanIznosPrihodaPoPolazniku()
@@ -128,7 +155,6 @@ namespace ConsoleApp.E17KonzolnaAplikacija
                 ukupniPrihod += (grupa.Smjer.Cijena + grupa.Smjer.Upisnina) * (grupa.Polaznici?.Count() ?? 0);
             }
             Console.WriteLine("Prosjecan iznos prihoda po polazniku: {0:c}", ukupniPrihod / (decimal)brojPolaznika);
-
         }
 
         private void UkupanIznosPrihodaPoSmjerovima()
