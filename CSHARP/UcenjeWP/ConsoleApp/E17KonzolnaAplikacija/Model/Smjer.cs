@@ -9,6 +9,7 @@ namespace ConsoleApp.E17KonzolnaAplikacija.Model
         public decimal Cijena { get; set; }
         public decimal Upisnina { get; set; }
         public bool Verificiran { get; set; }
+        public List<Grupa>? GrupeUSmjeru { get; set; }
 
         public override string ToString()
         {

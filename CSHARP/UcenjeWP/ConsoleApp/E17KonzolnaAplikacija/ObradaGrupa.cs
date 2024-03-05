@@ -38,6 +38,16 @@ namespace ConsoleApp.E17KonzolnaAplikacija
 
             Grupe.Add(new Grupa()
             {
+                Sifra = 3,
+                Naziv = "WP2",
+                Smjer = Izbornik.ObradaSmjer.Smjerovi[0],
+                Polaznici = Izbornik.ObradaPolaznik.Polaznici.GetRange(6, 14),
+                DatumPocetka = DateTime.Parse("2024-03-04 12:30:45"),
+                Predavac = Izbornik.ObradaPredavac.Predavaci[0]
+            });
+
+            Grupe.Add(new Grupa()
+            {
                 Sifra = 2,
                 Naziv = "JP28",
                 Smjer = Izbornik.ObradaSmjer.Smjerovi[1],
@@ -55,9 +65,10 @@ namespace ConsoleApp.E17KonzolnaAplikacija
             Console.WriteLine("2. Unos nove grupe");
             Console.WriteLine("3. Promjena postojeće grupe");
             Console.WriteLine("4. Brisanje grupe");
-            Console.WriteLine("5. Povratak na glavni izbornik");
+            Console.WriteLine("5. STATISTIKA");
+            Console.WriteLine("6. Povratak na glavni izbornik");
             switch (Pomocno.ucitajBrojRaspon("Odaberite stavku izbornika grupa: ",
-                "Odabir mora biti 1-5", 1, 5))
+                "Odabir mora biti 1-6", 1, 6))
             {
                 case 1:
                     Console.Clear();
@@ -80,9 +91,81 @@ namespace ConsoleApp.E17KonzolnaAplikacija
                     PrikaziIzbornik();
                     break;
                 case 5:
+                    PrikaziStatistiku();
+                    Console.Clear();
+                    PrikaziIzbornik();
+                    break;
+                case 6:
                     Console.WriteLine("Gotov rad s grupama");
                     break;
             }
+        }
+
+        private void PrikaziStatistiku()
+        {
+            Console.WriteLine("--------------------");
+            Console.WriteLine("---- Statistika ----");
+            Console.WriteLine("--------------------");
+            Console.WriteLine();
+            UkupnoPolaznikaNaGrupama();
+            ProsjekUGrupi();
+            UkupanIznosPrihodaPoSmjerovima();
+            //ProsjecanIznosPrihodaPoPolazniku();
+
+            Console.ReadKey();
+        }
+
+        private void ProsjecanIznosPrihodaPoPolazniku()
+        {
+            Console.WriteLine();
+        }
+
+        private void UkupanIznosPrihodaPoSmjerovima()
+        {
+            //Console.Write("Ukupan iznos prihoda po smjerovima: ");
+
+            decimal prihod;
+            foreach (Smjer smjer in Izbornik.ObradaSmjer.Smjerovi)
+            {
+                prihod = 0;
+                if (smjer.GrupeUSmjeru == null || smjer.GrupeUSmjeru.Count() == 0)
+                {
+                    continue;
+                }
+                foreach(Grupa grupa in smjer.GrupeUSmjeru)
+                {
+                    int brojPolaznika = grupa.Polaznici?.Count() ?? 0;
+                    prihod += (smjer.Upisnina + smjer.Cijena) * brojPolaznika;                    
+                }
+                Console.WriteLine("Prihod smjera {0}: {1:C}", smjer.Naziv, prihod);
+            }
+        }
+
+        private void ProsjekUGrupi()
+        {
+            Console.Write("Prosječan broj polaznika u grupi: ");
+            double prosjek;
+            int broj = 0;
+            foreach (var grupa in Grupe)
+            {
+                if (grupa.Polaznici == null || grupa.Polaznici.Count() == 0)
+                {
+                    broj += 0;
+                }
+                else
+                {
+                    broj += grupa.Polaznici.Count();
+                }
+            }
+            Console.WriteLine("{0:0.##}", prosjek = (double)broj / Grupe.Count());
+        }
+
+        private void UkupnoPolaznikaNaGrupama()
+        {
+            Console.Write("Ukupno polaznika na svim grupama: ");
+            int ukupnoPolaznika = 0;
+            Grupe.ForEach(grupa => ukupnoPolaznika += (grupa.Polaznici == null ? 0 : grupa.Polaznici.Count()));
+            Console.WriteLine(ukupnoPolaznika);
         }
 
         private void PromjenaGrupe()
@@ -174,7 +257,6 @@ namespace ConsoleApp.E17KonzolnaAplikacija
             {
                 polaznici.RemoveAt(index - 1);
             }
-            
         }
 
         private List<Polaznik> PostaviPolaznike()

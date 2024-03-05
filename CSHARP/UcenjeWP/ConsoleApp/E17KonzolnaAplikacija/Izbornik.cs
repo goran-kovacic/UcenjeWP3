@@ -1,4 +1,7 @@
 ﻿
+
+using ConsoleApp.E17KonzolnaAplikacija.Model;
+
 namespace ConsoleApp.E17KonzolnaAplikacija
 {
     internal class Izbornik
@@ -17,9 +20,27 @@ namespace ConsoleApp.E17KonzolnaAplikacija
             ObradaPolaznik = new ObradaPolaznik();
             ObradaPredavac = new ObradaPredavac(); 
             ObradaGrupa =new ObradaGrupa(this);
+            UpdateTestniPodaciZaSmjer();
             
             //PozdravnaPoruka();
             PrikaziIzbornik();
+        }
+
+        private void UpdateTestniPodaciZaSmjer()
+        {
+            foreach (Smjer smjer in ObradaSmjer.Smjerovi)
+            {
+                string nazivSmjera = smjer.Naziv;
+                List<Grupa> grupe = new List<Grupa>();
+                foreach (Grupa grupa in ObradaGrupa.Grupe)
+                {
+                    if(grupa.Smjer.Naziv == nazivSmjera)
+                    {
+                        grupe.Add(grupa);
+                    }
+                }
+                smjer.GrupeUSmjeru = grupe;
+            }
         }
 
         private void PozdravnaPoruka()

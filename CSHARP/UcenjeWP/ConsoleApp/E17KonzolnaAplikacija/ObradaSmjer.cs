@@ -5,6 +5,7 @@ namespace ConsoleApp.E17KonzolnaAplikacija
     internal class ObradaSmjer
     {
         public List<Smjer> Smjerovi { get; }
+        private Izbornik Izbornik;
 
         public ObradaSmjer()
         {
@@ -148,14 +149,13 @@ namespace ConsoleApp.E17KonzolnaAplikacija
 
         private void TestniPodaci()
         {
-
             Smjerovi.Add(new Smjer
             {
                 Sifra = 1,
                 Naziv = "Web programiranje",
                 Trajanje = 250,
-                Cijena = 1000,
-                Upisnina = 50,
+                Cijena = 1200,
+                Upisnina = 55,
                 Verificiran = true
             });
 
@@ -184,8 +184,15 @@ namespace ConsoleApp.E17KonzolnaAplikacija
             });
             // završilo dodavanje smjera
 
-
-
         }
+
+        //public void UpdateTestniPodaci()
+        //{
+        //    foreach(Smjer smjer in Smjerovi)
+        //    {
+        //        List<Grupa> grupe = new List<Grupa>();
+        //        Izbornik.obra
+        //    }
+        //}
     }
 }
