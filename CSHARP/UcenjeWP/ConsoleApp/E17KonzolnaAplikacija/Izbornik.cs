@@ -14,14 +14,12 @@ namespace ConsoleApp.E17KonzolnaAplikacija
 
         public Izbornik() 
         {
-            
             Pomocno.dev = true;
             ObradaSmjer = new ObradaSmjer();
             ObradaPolaznik = new ObradaPolaznik();
             ObradaPredavac = new ObradaPredavac(); 
             ObradaGrupa =new ObradaGrupa(this);
             UpdateTestniPodaciZaSmjer();
-            
             //PozdravnaPoruka();
             PrikaziIzbornik();
         }
@@ -87,7 +85,6 @@ namespace ConsoleApp.E17KonzolnaAplikacija
                 case 5:
                     Console.WriteLine("Hvala na korištenju, doviđenja");
                     break;
-                
                 //case 5:
                 //    ConsoleHelper.SetConsoleFont("Times New Roman", 40);
                 //    PrikaziIzbornik();

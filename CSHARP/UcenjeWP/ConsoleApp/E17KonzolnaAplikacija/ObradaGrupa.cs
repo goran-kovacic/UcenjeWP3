@@ -135,14 +135,6 @@ namespace ConsoleApp.E17KonzolnaAplikacija
             Console.WriteLine($"Najraniji pocetak grupe: {najranijiDatum} ({nazivNajranijeGrupe})");
             Console.WriteLine($"Najkasniji pocetak grupe: {najkasnijiDatum} ({nazivNajkasnijeGrupe})");
             Console.WriteLine($"Razlika najranijeg i najkasnijeg pocetka grupe: {difference.TotalDays:0.##} dana");
-
-            //foreach (Grupa grupa in Grupe)
-            //{
-            //    if(grupa.DatumPocetka == null)
-            //    {
-            //        continue;
-            //    }
-            //}
         }
 
         private void ProsjecanIznosPrihodaPoPolazniku()
@@ -220,7 +212,6 @@ namespace ConsoleApp.E17KonzolnaAplikacija
             }
             p.Sifra = novaSifra == 0 ? p.Sifra : novaSifra;
 
-
             string naziv = Pomocno.PromijeniString("Unesite naziv grupe (" + p.Naziv + "): ",
                 "Unos obavezan");
             p.Naziv = naziv == "" ? p.Naziv : naziv;
@@ -235,7 +226,6 @@ namespace ConsoleApp.E17KonzolnaAplikacija
             int b = 1;
             if (p.Polaznici != null)
             {
-
                 foreach (Polaznik polaznik in p.Polaznici)
                 {
                     Console.WriteLine("{0}. {1}", b++, polaznik);
@@ -251,7 +241,6 @@ namespace ConsoleApp.E17KonzolnaAplikacija
             {
                 p.Predavac = PostaviPredavaca();
             }
-            
         }
 
         private List<Polaznik>? IzmjeniPolaznike(int index)
@@ -302,7 +291,6 @@ namespace ConsoleApp.E17KonzolnaAplikacija
             {
                 polaznici.Add(PostaviPolaznika());
             }
-
             return polaznici;
         }
 
@@ -359,7 +347,6 @@ namespace ConsoleApp.E17KonzolnaAplikacija
             g.DatumPocetka = Pomocno.ucitajDatum("Unesi datum grupe u formatu dd.MM.yyyy.", "Greška");
             g.Predavac = PostaviPredavaca();
             Grupe.Add(g);
-
         }
 
         private Predavac PostaviPredavaca()
@@ -392,7 +379,6 @@ namespace ConsoleApp.E17KonzolnaAplikacija
             int b = 1;
             foreach (Grupa grupa in Grupe)
             {
-
                 if (grupa.Predavac == null)
                 {
                     Console.WriteLine("{0}. {1} ({2}, predavac: NEMA)", b++, grupa.Naziv, grupa.Smjer.Naziv);
@@ -410,7 +396,6 @@ namespace ConsoleApp.E17KonzolnaAplikacija
                 }
                 else
                 {
-
                     Console.WriteLine("{0}. {1} ({2}, predavac: {3})", b++, grupa.Naziv, grupa.Smjer.Naziv, grupa.Predavac.ToString());
                     if (grupa.Polaznici == null)
                     {
@@ -427,7 +412,5 @@ namespace ConsoleApp.E17KonzolnaAplikacija
             }
             Console.WriteLine("------------------");
         }
-
-
     }
 }

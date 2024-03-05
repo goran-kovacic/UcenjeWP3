@@ -18,7 +18,6 @@ namespace ConsoleApp.E17KonzolnaAplikacija
 
         public void PrikaziIzbornik()
         {
-           
             Console.WriteLine("Izbornik za rad s polaznicima");
             Console.WriteLine("1. Pregled postojećih polaznika");
             Console.WriteLine("2. Unos novog polaznika");
@@ -28,7 +27,6 @@ namespace ConsoleApp.E17KonzolnaAplikacija
             switch (Pomocno.ucitajBrojRaspon("Odaberite stavku izbornika polaznika: ",
                 "Odabir mora biti 1-5", 1, 5))
             {
-                
                 case 1:
                     Console.Clear();
                     PregledPolaznika();
@@ -131,7 +129,6 @@ namespace ConsoleApp.E17KonzolnaAplikacija
 
         private void TestniPodaci()
         {
-
             for(int i=0;i<20; i++) {
                 string name = Faker.Name.First();
                 string lastName = Faker.Name.Last();

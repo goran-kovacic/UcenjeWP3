@@ -18,7 +18,6 @@ namespace ConsoleApp.E17KonzolnaAplikacija
 
         public void PrikaziIzbornik()
         {
-            
             Console.WriteLine("Izbornik za rad s smjerovima");
             Console.WriteLine("1. Pregled postojećih smjerova");
             Console.WriteLine("2. Unos novog smjera");
@@ -134,7 +133,6 @@ namespace ConsoleApp.E17KonzolnaAplikacija
             s.Upisnina = Pomocno.ucitajDecimalniBroj("Unesi upisninu (. za decimalni dio): ", "Unos mora biti pozitivan broj");
             s.Verificiran = Pomocno.ucitajBool("Smjer verificiran? Da ili bilo što drugo za ne: ");
             Smjerovi.Add(s);
-
         }
 
         public void PrikaziSmjerove()
@@ -183,7 +181,6 @@ namespace ConsoleApp.E17KonzolnaAplikacija
                 Verificiran = true
             });
             // završilo dodavanje smjera
-
         }
 
         //public void UpdateTestniPodaci()
