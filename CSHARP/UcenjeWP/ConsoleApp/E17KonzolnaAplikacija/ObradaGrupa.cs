@@ -113,14 +113,22 @@ namespace ConsoleApp.E17KonzolnaAplikacija
             UkupnoPolaznikaNaGrupama();
             ProsjekUGrupi();
             UkupanIznosPrihodaPoSmjerovima();
-            //ProsjecanIznosPrihodaPoPolazniku();
+            ProsjecanIznosPrihodaPoPolazniku();
 
             Console.ReadKey();
         }
 
         private void ProsjecanIznosPrihodaPoPolazniku()
         {
-            Console.WriteLine();
+            int brojPolaznika = 0;
+            decimal ukupniPrihod = 0;
+            foreach(Grupa grupa in Grupe)
+            {
+                brojPolaznika += grupa.Polaznici?.Count() ?? 0;
+                ukupniPrihod += (grupa.Smjer.Cijena + grupa.Smjer.Upisnina) * (grupa.Polaznici?.Count() ?? 0);
+            }
+            Console.WriteLine("Prosjecan iznos prihoda po polazniku: {0:c}", ukupniPrihod / (decimal)brojPolaznika);
+
         }
 
         private void UkupanIznosPrihodaPoSmjerovima()
