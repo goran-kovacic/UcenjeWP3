@@ -10,14 +10,12 @@ namespace ConsoleApp.E17KonzolnaAplikacija
 {
     internal class ObradaPredavac
     {
-
         public List<Predavac> Predavaci { get; }
         private Izbornik Izbornik;
 
         public ObradaPredavac(Izbornik izbornik):this()
         {
             this.Izbornik=izbornik;
-           
         }
 
         public ObradaPredavac()
