@@ -245,7 +245,7 @@ namespace ConsoleApp.E17KonzolnaAplikacija
 
         private List<Polaznik>? IzmjeniPolaznike(int index)
         {
-            List<Polaznik> polaznici = Grupe[index].Polaznici;
+            List<Polaznik> polaznici = Grupe[index].Polaznici ?? new List<Polaznik>();
             while (Pomocno.ucitajBool("Zelite li mijenjati polaznike? (da ili bilo sto drugo za ne): "))
             {                
                 switch(Pomocno.ucitajBrojRaspon("Zelite li (1)dodati ili (2)obrisati polaznika? Enter za prekid: ", "Odabir mora biti 1,2 ili 0!",

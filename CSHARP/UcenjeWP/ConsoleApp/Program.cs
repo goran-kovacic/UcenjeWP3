@@ -6,7 +6,9 @@ internal class Program
 {
     private static void Main(string[] args)
     {
-        new ConsoleApp.E17KonzolnaAplikacija.Izbornik();
+        new ConsoleApp.KonzolnaZavrsni.Menu();
+
+        //new ConsoleApp.E17KonzolnaAplikacija.Izbornik();
 
     }
 }
