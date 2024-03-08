@@ -40,7 +40,7 @@ namespace ConsoleApp.KonzolnaZavrsni
             Console.WriteLine("\t6. Printers");
             Console.WriteLine("\t7. EXIT");
 
-            switch(Helpers.NumberRange("Select menu item: ", "Selection must be 1 - 8", 1, 8))
+            switch(Helpers.NumberRange("Select menu item: ", "Selection must be 1 - 7", 1, 7))
             {
                 case 1:
                     Console.Clear();
