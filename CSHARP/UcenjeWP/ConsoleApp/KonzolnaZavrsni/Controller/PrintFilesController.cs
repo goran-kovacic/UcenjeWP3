@@ -9,14 +9,27 @@ namespace ConsoleApp.KonzolnaZavrsni.Controller
 {
     internal class PrintFilesController
     {
-        public string FilePath { get; set; }
-        public string FileType { get; set; }
-        public int Version { get; set; }
-        public Part Part { get; set; }
+        public List<PrintFile> PrintFiles { get; }
+        private Menu Menu;
 
-        public override string ToString()
+        public PrintFilesController(Menu Menu):this()
         {
-            return Part.PartName + " (" + FileType + ")" + " v" + Version ;
+            this.Menu = Menu;
+            if (Helpers.Dev)
+            {
+                TestData();
+            }
         }
+        public PrintFilesController()
+        {
+            PrintFiles = new List<PrintFile>();
+        }
+
+        private void TestData()
+        {
+            throw new NotImplementedException();
+        }
+
+        
     }
 }

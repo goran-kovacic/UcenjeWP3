@@ -13,5 +13,10 @@ namespace ConsoleApp.KonzolnaZavrsni.Model
         public string FileType { get; set; }
         public Part Part { get; set; }
         public int? FileVersion { get; set; }
+
+        public override string ToString()
+        {
+            return Part.PartName + " (" + FileType + ")" + " v" + FileVersion;
+        }
     }
 }
