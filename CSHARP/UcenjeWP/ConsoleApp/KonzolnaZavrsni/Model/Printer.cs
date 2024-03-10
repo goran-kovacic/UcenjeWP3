@@ -12,5 +12,13 @@ namespace ConsoleApp.KonzolnaZavrsni.Model
         public string Manufacturer { get; set; }
         public string PrinterName { get; set; }
         public  int PrinterTime { get; set; }
+        public PrintJob PrintJobs { get; set; }
+
+        public override string ToString()
+        {
+            return PrinterName + " (" + Manufacturer + "), Printer time: "
+                + (PrinterTime==null ? 0 : PrinterTime)
+                + ", Fep count: " + (FepCount == null ? 0 : FepCount);
+        }
     }
 }

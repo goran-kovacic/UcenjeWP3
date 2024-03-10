@@ -21,5 +21,10 @@ namespace ConsoleApp.KonzolnaZavrsni.Model
         public decimal LiftSpeed { get; set; }
         public decimal LightOffDelay { get; set; }
         public decimal RetractSpeed { get; set; }
+
+        public override string ToString()
+        {
+            return MaterialName + " (" + Manufacturer + ")";
+        }
     }
 }

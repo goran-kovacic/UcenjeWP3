@@ -67,8 +67,15 @@ namespace ConsoleApp.KonzolnaZavrsni.Controller
         private void DeleteProject()
         {
             ShowProjects();
-            int index = Helpers.NumberRange("Select project: ", "invalid input", 1, Projects.Count());
-            Projects.RemoveAt(index-1);
+            int index = Helpers.NumberRange("Select project (Enter to cancel): ", "invalid input", 1, Projects.Count(), "");
+            if (index == 0)
+            {
+                return;
+            }
+            if (Helpers.InputBool("Are you sure you want to delete? ('Yes' to delete, any other input to continue): "))
+            {
+                Projects.RemoveAt(index - 1);
+            }
         }
 
         private void EditProject()

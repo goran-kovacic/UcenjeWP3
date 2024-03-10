@@ -75,8 +75,15 @@ namespace ConsoleApp.KonzolnaZavrsni.Controller
         private void DeleteFile()
         {
             ShowFiles();
-            int index = Helpers.NumberRange("Select file: ", "invalid input", 1, Files.Count()) - 1;
-            Files.RemoveAt(index);
+            int index = Helpers.NumberRange("Select file: ", "invalid input", 1, Files.Count(),"");
+            if (index == 0)
+            {
+                return;
+            }
+            if (Helpers.InputBool("Are you sure you want to delete? ('Yes' to delete, any other input to continue): "))
+            {
+                Files.RemoveAt(index-1);
+            }
         }
 
         private void EditFile()

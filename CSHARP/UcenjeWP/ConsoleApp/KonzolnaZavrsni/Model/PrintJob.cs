@@ -14,5 +14,6 @@ namespace ConsoleApp.KonzolnaZavrsni.Model
         public decimal Volume { get; set; }
         public Material Material { get; set; }
         public Printer Printer { get; set; }
+        public Part Part { get; set; }
     }
 }

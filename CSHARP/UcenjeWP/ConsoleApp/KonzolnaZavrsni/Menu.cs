@@ -15,6 +15,8 @@ namespace ConsoleApp.KonzolnaZavrsni
         public PartController PartController { get; }
         
         public PrintFilesController PrintFilesController { get; }
+        public PrinterController PrinterController { get; }
+        public MaterialController MaterialController { get; }
 
         public Menu() 
         {
@@ -22,6 +24,8 @@ namespace ConsoleApp.KonzolnaZavrsni
             ProjectController = new ProjectController();
             PartController = new PartController(this);
             PrintFilesController = new PrintFilesController(this);
+            PrinterController = new PrinterController(this);
+            MaterialController = new MaterialController();
             UpdateProjectsTestData();
             UpdatePartsTestData();
             ShowMenu();
@@ -41,8 +45,8 @@ namespace ConsoleApp.KonzolnaZavrsni
             Console.WriteLine("\t2. Parts");
             Console.WriteLine("\t3. Files");
             Console.WriteLine("\t4. Print jobs");
-            Console.WriteLine("\t5. Materials");
-            Console.WriteLine("\t6. Printers");
+            Console.WriteLine("\t5. Printers");
+            Console.WriteLine("\t6. Materials");
             Console.WriteLine("\t7. EXIT");
 
             switch(Helpers.NumberRange("Select menu item: ", "Selection must be 1 - 7", 1, 7))
@@ -62,9 +66,24 @@ namespace ConsoleApp.KonzolnaZavrsni
                     PrintFilesController.ShowMenu();
                     ShowMenu();
                     break;
-
-
-
+                case 4:
+                    Console.Clear();
+                    //PrintJobController.ShowMenu();
+                    ShowMenu();
+                    break;
+                case 5:
+                    Console.Clear();
+                    PrinterController.ShowMenu();
+                    ShowMenu();
+                    break;
+                case 6:
+                    Console.Clear();
+                    MaterialController.ShowMenu();
+                    ShowMenu();
+                    break;
+                case 7:
+                    Console.WriteLine("end");
+                    break;
             }
         }
 

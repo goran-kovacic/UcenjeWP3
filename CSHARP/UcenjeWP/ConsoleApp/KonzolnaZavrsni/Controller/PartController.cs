@@ -73,8 +73,15 @@ namespace ConsoleApp.KonzolnaZavrsni.Controller
         private void DeletePart()
         {
             ShowParts();
-            int index = Helpers.NumberRange("Select part: ", "invalidinput", 1, Parts.Count()) - 1;
-            Parts.RemoveAt(index);
+            int index = Helpers.NumberRange("Select part: ", "invalidinput", 1, Parts.Count(), "");
+            if (index == 0)
+            {
+                return;
+            }
+            if (Helpers.InputBool("Are you sure you want to delete? ('Yes' to delete, any other input to continue): "))
+            {
+                Parts.RemoveAt(index-1);
+            }
         }
 
         private void EditPart()
