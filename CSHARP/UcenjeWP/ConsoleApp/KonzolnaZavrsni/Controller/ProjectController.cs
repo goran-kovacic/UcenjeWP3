@@ -74,8 +74,8 @@ namespace ConsoleApp.KonzolnaZavrsni.Controller
         private void EditProject()
         {
             ShowProjects();
-            int index = Helpers.NumberRange("Select project: ", "Invalid input", 1, Projects.Count()) - 1;
-            var p = Projects[index];
+            int index = Helpers.NumberRange("Select project: ", "Invalid input", 1, Projects.Count());
+            var p = Projects[index-1];
 
             int newId = Helpers.EditInt("Input project id (" + p.Id + ") (Enter to skip): ", "Invalid input", "");
             while (Projects.Exists(pr => pr.Id == newId && pr != p))
@@ -112,6 +112,7 @@ namespace ConsoleApp.KonzolnaZavrsni.Controller
                 Console.WriteLine("Existing id!");
                 id = Helpers.InputInt("Enter id: ", "Must be positive integer");
             }
+            p.Id = id;
             p.ProjectName = Helpers.InputString("Project name: ", "Invalid input");
             p.CreationDate = Helpers.InputDate("Enter creation date: ", "Invalid input!");
             p.CompletionDate = Helpers.InputDate("Enter completion date: ", "Invalid input!");

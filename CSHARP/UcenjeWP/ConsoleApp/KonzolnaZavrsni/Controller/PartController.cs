@@ -96,10 +96,12 @@ namespace ConsoleApp.KonzolnaZavrsni.Controller
 
             if (p.Project != null)
             {
-                int projectIndex = p.Project.Id;
-                p.Project = ChangeProject(projectIndex);
-            }
-            if (Helpers.InputBool("Do you wish to assign this part to a project? \"Yes\" or any other input for no: "))
+                int projectIndex = p.Project.Id-1;
+                if (Helpers.InputBool("Do you wish to change the project for this part? \"Yes\" or any other input for no: "))
+                {
+                    p.Project = ChangeProject(projectIndex);
+                }
+            }else if(Helpers.InputBool("Do you wish to assign this part to a project? \"Yes\" or any other input for no: "))
             {
                 p.Project = SetProject();
             }
@@ -107,14 +109,10 @@ namespace ConsoleApp.KonzolnaZavrsni.Controller
         }
 
         private Project ChangeProject(int projectIndex)
-        {
+        {            
             Menu.ProjectController.ShowProjects();
-            int index = Helpers.NumberRange("Select project: ", "invalid input", 1, Menu.ProjectController.Projects.Count(), "") -1;
-            if(index == 0)
-            {
-                return Menu.ProjectController.Projects[projectIndex];
-            }
-            return Menu.ProjectController.Projects[index];
+            int index = Helpers.NumberRange("Select project: ", "invalid input", 1, Menu.ProjectController.Projects.Count(), "");
+            return index == 0 ? Menu.ProjectController.Projects[projectIndex] : Menu.ProjectController.Projects[index-1];
         }
 
         private void CreateNewPart()
@@ -127,7 +125,8 @@ namespace ConsoleApp.KonzolnaZavrsni.Controller
                 Console.WriteLine("Existing id!");
                 Id = Helpers.InputInt("Enter id: ", "Must be positive integer");
             }
-            p.PartName = Helpers.InputString("Project name: ", "Invalid input");
+            p.Id = Id;
+            p.PartName = Helpers.InputString("Part name: ", "Invalid input");
             p.Project = SetProject();
             Parts.Add(p);
         }
@@ -135,11 +134,18 @@ namespace ConsoleApp.KonzolnaZavrsni.Controller
         private Project SetProject()
         {
             Menu.ProjectController.ShowProjects();
-            int index = Helpers.NumberRange("Select project: ", "Invalid input", 1, Menu.ProjectController.Projects.Count()) - 1;
-            return Menu.ProjectController.Projects[index];
+            int index = Helpers.NumberRange("Select project: ", "Invalid input", 1, Menu.ProjectController.Projects.Count(),"");
+
+            //return index == 0 ? null : Menu.ProjectController.Projects[index];
+
+            if (index == 0)
+            {
+                return null;
+            }
+            return Menu.ProjectController.Projects[index-1];
         }
 
-        private void ShowParts()
+        public void ShowParts()
         {
             Console.WriteLine("------------------");
             Console.WriteLine("------ Parts -----");

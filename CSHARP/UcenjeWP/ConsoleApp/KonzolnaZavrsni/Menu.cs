@@ -12,13 +12,18 @@ namespace ConsoleApp.KonzolnaZavrsni
     internal class Menu
     {
         public ProjectController ProjectController { get; }
-        private PartController PartController;
+        public PartController PartController { get; }
+        
+        public PrintFilesController PrintFilesController { get; }
+
         public Menu() 
         {
             Helpers.Dev = true;
             ProjectController = new ProjectController();
             PartController = new PartController(this);
+            PrintFilesController = new PrintFilesController(this);
             UpdateProjectsTestData();
+            UpdatePartsTestData();
             ShowMenu();
         }
 
@@ -52,6 +57,13 @@ namespace ConsoleApp.KonzolnaZavrsni
                     PartController.ShowMenu();
                     ShowMenu();
                     break;
+                case 3:
+                    Console.Clear();
+                    PrintFilesController.ShowMenu();
+                    ShowMenu();
+                    break;
+
+
 
             }
         }
@@ -71,6 +83,23 @@ namespace ConsoleApp.KonzolnaZavrsni
                     }
                 }
                 project.PartsInProject = parts;
+            }
+        }
+
+        internal void UpdatePartsTestData()
+        {
+            foreach(Part part in PartController.Parts)
+            {
+                string partName = part.PartName;
+                List<PrintFile> printFiles = new List<PrintFile>();
+                foreach(PrintFile file in PrintFilesController.Files)
+                {
+                    if(file.Part.PartName == partName)
+                    {
+                        printFiles.Add(file);
+                    }
+                }
+                part.FilesInPart = printFiles;
             }
         }
     }
