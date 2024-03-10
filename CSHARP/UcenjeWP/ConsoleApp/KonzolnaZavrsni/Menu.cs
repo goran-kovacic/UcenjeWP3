@@ -17,6 +17,7 @@ namespace ConsoleApp.KonzolnaZavrsni
         public PrintFilesController PrintFilesController { get; }
         public PrinterController PrinterController { get; }
         public MaterialController MaterialController { get; }
+        public PrintJobController PrintJobController { get; }
 
         public Menu() 
         {
@@ -26,6 +27,7 @@ namespace ConsoleApp.KonzolnaZavrsni
             PrintFilesController = new PrintFilesController(this);
             PrinterController = new PrinterController(this);
             MaterialController = new MaterialController();
+            PrintJobController = new PrintJobController(this);
             UpdateProjectsTestData();
             UpdatePartsTestData();
             ShowMenu();
@@ -68,7 +70,7 @@ namespace ConsoleApp.KonzolnaZavrsni
                     break;
                 case 4:
                     Console.Clear();
-                    //PrintJobController.ShowMenu();
+                    PrintJobController.ShowMenu();
                     ShowMenu();
                     break;
                 case 5:

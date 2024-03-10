@@ -15,5 +15,10 @@ namespace ConsoleApp.KonzolnaZavrsni.Model
         public Material Material { get; set; }
         public Printer Printer { get; set; }
         public Part Part { get; set; }
+
+        public override string ToString()
+        {
+            return Part.PartName + ", Print time: " + (PrintTime==0 ? 0 : PrintTime) + "h";
+        }
     }
 }
