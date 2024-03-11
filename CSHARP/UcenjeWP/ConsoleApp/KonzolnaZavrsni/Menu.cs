@@ -49,9 +49,10 @@ namespace ConsoleApp.KonzolnaZavrsni
             Console.WriteLine("\t4. Print jobs");
             Console.WriteLine("\t5. Printers");
             Console.WriteLine("\t6. Materials");
-            Console.WriteLine("\t7. EXIT");
+            Console.WriteLine("\t7. STATISTICS");
+            Console.WriteLine("\t8. EXIT");
 
-            switch(Helpers.NumberRange("Select menu item: ", "Selection must be 1 - 7", 1, 7))
+            switch(Helpers.NumberRange("Select menu item: ", "Selection must be 1 -8 ", 1, 8))
             {
                 case 1:
                     Console.Clear();
@@ -84,9 +85,83 @@ namespace ConsoleApp.KonzolnaZavrsni
                     ShowMenu();
                     break;
                 case 7:
+                    ShowStats();
+                    Console.Clear();
+                    ShowMenu();
+                    break;
+                case 8:
                     Console.WriteLine("end");
                     break;
             }
+        }
+
+        private void ShowStats()
+        {
+            Console.Clear();
+            Console.WriteLine("\r\n  ____  _        _   _     _   _          \r\n / _" +
+                "__|| |_ __ _| |_(_)___| |_(_) ___ ___ \r\n \\___ \\| __/ _` | __| / _" +
+                "_| __| |/ __/ __|\r\n  ___) | || (_| | |_| \\__ \\ |_| | (__\\__ \\\r\n |_" +
+                "___/ \\__\\__,_|\\__|_|___/\\__|_|\\___|___/\r\n                       " +
+                "                   \r\n");
+            Console.WriteLine();
+            TotalParts();
+            TotalPartsInProjects();
+            AveragePartPerProject();
+            Dates();
+            Console.WriteLine();
+            Console.WriteLine("Press any key to continue...");            
+            Console.ReadKey();
+        }
+
+        private void Dates()
+        {
+            var p = ProjectController.Projects;
+
+            Project earliestProject = p.OrderBy(pr => pr.CreationDate).First();
+            DateTime earliestDate = (DateTime)earliestProject.CreationDate;
+            string nameOfProject = earliestProject.ProjectName;
+
+            Project latestProject = p.OrderBy(pr => pr.CreationDate).Last();
+            DateTime latestDate = (DateTime)latestProject.CreationDate;
+            string nameOfLatestProject = latestProject.ProjectName;
+
+            TimeSpan difference = latestDate - earliestDate;
+
+            Console.WriteLine($"\tEarliest project: {earliestDate} ({nameOfProject})");
+            Console.WriteLine($"\tLatest project: {latestDate} ({nameOfLatestProject})");
+            Console.WriteLine($"\tDifference between earliest and latest project: {difference.TotalDays:0.##} days");
+        }
+
+        private void AveragePartPerProject()
+        {
+            Console.Write("\tAverage number of parts in a project: ");
+            var project = ProjectController.Projects;
+            int count = 0;
+            foreach (var pr in project)
+            {
+                if (pr.PartsInProject == null || pr.PartsInProject.Count() == 0)
+                {
+                    count += 0;
+                }
+                else
+                {
+                    count += pr.PartsInProject.Count();
+                }
+            }
+            Console.WriteLine("{0:0.##}", (double)count / project.Count());
+        }
+
+        private void TotalParts()
+        {            
+            Console.WriteLine("\tTotal parts: " + PartController.Parts.Count());
+        }
+
+        private void TotalPartsInProjects()
+        {
+            Console.Write("\tTotal parts assigned to a project: ");
+            int total = 0;
+            ProjectController.Projects.ForEach(project => total += (project.PartsInProject == null ? 0 : project.PartsInProject.Count()));
+            Console.WriteLine(total);
         }
 
         public void UpdateProjectsTestData()

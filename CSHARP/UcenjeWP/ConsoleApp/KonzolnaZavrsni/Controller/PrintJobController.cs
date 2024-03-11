@@ -68,9 +68,9 @@ namespace ConsoleApp.KonzolnaZavrsni.Controller
                     Console.Clear();
                     ShowMenu();
                     break;
-                    //case 5:
-                    //    Console.WriteLine("end");
-                    //    break;
+                case 5:
+                    Console.WriteLine("end");
+                    break;
             }
         }
 

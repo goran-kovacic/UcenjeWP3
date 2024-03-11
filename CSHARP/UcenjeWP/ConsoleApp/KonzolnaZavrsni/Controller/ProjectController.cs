@@ -156,7 +156,7 @@ namespace ConsoleApp.KonzolnaZavrsni.Controller
             Projects.Add(new Project
             {
                 ProjectName = "Test3",                
-                CreationDate = DateTime.Parse("2023-11-20 12:30:45"),
+                CreationDate = DateTime.Parse("2021-11-20 12:30:45"),
                 CompletionDate = null,
                 Id = 3,
             });
