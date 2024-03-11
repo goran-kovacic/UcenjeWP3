@@ -148,7 +148,7 @@ namespace ConsoleApp.KonzolnaZavrsni.Controller
             return Menu.PartController.Parts[index - 1];
         }
 
-        private void ShowFiles()
+        public void ShowFiles()
         {
             Console.WriteLine("------------------");
             Console.WriteLine("------ Files -----");

@@ -49,10 +49,11 @@ namespace ConsoleApp.KonzolnaZavrsni
             Console.WriteLine("\t4. Print jobs");
             Console.WriteLine("\t5. Printers");
             Console.WriteLine("\t6. Materials");
-            Console.WriteLine("\t7. STATISTICS");
-            Console.WriteLine("\t8. EXIT");
+            Console.WriteLine("\t7. List all items");
+            Console.WriteLine("\t8. STATISTICS");
+            Console.WriteLine("\t9. EXIT");
 
-            switch(Helpers.NumberRange("Select menu item: ", "Selection must be 1 -8 ", 1, 8))
+            switch(Helpers.NumberRange("Select menu item: ", "Selection must be 1 - 9 ", 1, 9))
             {
                 case 1:
                     Console.Clear();
@@ -85,11 +86,22 @@ namespace ConsoleApp.KonzolnaZavrsni
                     ShowMenu();
                     break;
                 case 7:
+                    Console.Clear();
+                    ProjectController.ShowProjects();
+                    PartController.ShowParts();
+                    PrintFilesController.ShowFiles();
+                    PrintJobController.ShowPrintJobs();
+                    PrinterController.ShowPrinters();
+                    MaterialController.ShowMaterials();
+                    Console.ReadKey();
+                    ShowMenu();
+                    break;
+                case 8:
                     ShowStats();
                     Console.Clear();
                     ShowMenu();
                     break;
-                case 8:
+                case 9:
                     Console.WriteLine("end");
                     break;
             }

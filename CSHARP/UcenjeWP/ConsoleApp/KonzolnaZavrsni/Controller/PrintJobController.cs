@@ -189,7 +189,7 @@ namespace ConsoleApp.KonzolnaZavrsni.Controller
             return Menu.MaterialController.Materials[index-1];
         }
 
-        private void ShowPrintJobs()
+        public void ShowPrintJobs()
         {
             Console.WriteLine("-------------------");
             Console.WriteLine("------ Prints -----");
