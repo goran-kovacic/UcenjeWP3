@@ -123,7 +123,7 @@ namespace ConsoleApp.KonzolnaZavrsni.Controller
             Printers.Add(p);
         }
 
-        private void ShowPrinters()
+        public void ShowPrinters()
         {
             Console.WriteLine("---------------------");
             Console.WriteLine("------ Printers -----");

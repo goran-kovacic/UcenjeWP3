@@ -136,7 +136,7 @@ namespace ConsoleApp.KonzolnaZavrsni.Controller
             Materials.Add(m);
         }
 
-        private void ShowMaterials()
+        public void ShowMaterials()
         {
             Console.WriteLine("-------------------");
             Console.WriteLine("---- Materials ----");
