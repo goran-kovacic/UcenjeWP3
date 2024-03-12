@@ -36,7 +36,7 @@ CREATE TABLE materials (
   id int not null primary key identity(1,1),
   completionDate datetime DEFAULT NULL,
   creationDate datetime DEFAULT NULL,
-  isCompleted tinyint DEFAULT NULL,
+  isCompleted bit DEFAULT NULL,
   projectDescription varchar(255) DEFAULT NULL,
   projectName varchar(255) NOT NULL,
   totalCost decimal(38,2) DEFAULT NULL,
