@@ -58,6 +58,7 @@ CREATE TABLE users (
   cost decimal(38,2) DEFAULT NULL,
   partName varchar(255) NOT NULL,
   printTime int DEFAULT NULL,
+  printCount int DEFAULT NULL,
   project_id int DEFAULT NULL,
   foreign key (project_id) references projects (id)
   );
@@ -76,7 +77,7 @@ CREATE TABLE users (
   id int not null primary key identity(1,1),
   cost decimal(38,2) DEFAULT NULL,
   printTime int DEFAULT NULL,
-  result bit NOT NULL,
+  result bit,
   volume decimal(38,2) DEFAULT NULL,
   material int DEFAULT NULL,
   part_id int DEFAULT NULL,
